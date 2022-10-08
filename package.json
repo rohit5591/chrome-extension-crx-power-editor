@@ -5,6 +5,9 @@
     "scripts": {
       "init-repo": "node ./src/scripts/init-repo.js"
     },
+    "devDependencies": {
+      "shelljs": "^0.8.5"
+    },
     "author": "Rohit Nagare",
     "license": "MIT"
   }
