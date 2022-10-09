@@ -11,6 +11,7 @@ global.mkdirIfMissing(vsPath);
 shell.cd(vsPath);
 global.clone('https://github.com/microsoft/monaco-editor.git');
 global.clone('https://github.com/brijeshb42/monaco-themes.git');
+global.clone('https://github.com/microsoft/vscode-loader.git');
 //Initiate Code Mirror and Dependent Repos
 shell.cd("..");
 global.mkdirIfMissing(cmPath);
