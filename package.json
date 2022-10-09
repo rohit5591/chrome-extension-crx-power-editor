@@ -3,12 +3,17 @@
     "version": "1.1.0",
     "description": "Chrome Extension for CRX/DE",
     "scripts": {
-      "init-repo": "node ./src/scripts/init-repo.js"
+        "init-repo": "node ./src/scripts/init-repo.js",
+        "build-repo": "node ./src/scripts/build-repo.js"
     },
     "devDependencies": {
-      "shelljs": "^0.8.5"
+        "shelljs": "^0.8.5"
     },
     "author": "Rohit Nagare",
-    "license": "MIT"
-  }
-  
+    "license": "MIT",
+    "dependencies": {
+        "monaco-editor": "^0.34.0",
+        "monaco-themes": "^0.4.2",
+        "thememirror": "^2.0.1"
+    }
+}
