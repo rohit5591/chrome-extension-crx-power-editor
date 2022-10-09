@@ -152,7 +152,7 @@ namespace AMDLoader {
 					scriptSrc = trustedTypesPolicy.createScriptURL(scriptSrc);
 				}
 				//THIS IS THE ONLY WORKAROUND to APPEND PREFIX
-				const element = document.getElementById("plugin-prefix");
+				const element = (document.getElementById("plugin-prefix") as HTMLInputElement);
 				let prefix = "";
 				if(element && element?.value) {
 					prefix = element.value;
