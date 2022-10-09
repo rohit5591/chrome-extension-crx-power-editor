@@ -1,0 +1,132 @@
+#mainfrom {
+	width: 300px;
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+fieldset {
+	border: 1px groove #ddd !important;
+	padding: 0 1.4em 1.4em 1.4em !important;
+	margin: 0 0 1.5em 0 !important;
+	-webkit-box-shadow: 0px 0px 0px 0px #000;
+	box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend {
+	font-size: 1.2em !important;
+	font-weight: bold !important;
+	text-align: left !important;
+	width: inherit;
+	/* Or auto */
+	padding: 0 10px;
+	border-bottom: none;
+	margin-bottom: 10px;
+}
+
+button {
+	width: 70px;
+	margin-left: 10px;
+}
+
+#btnAdd {
+	margin-left: 0px;
+}
+
+#slider12c .slider-track-low {
+	background: #66CC66;
+}
+
+#slider12c .slider-selection {
+	background: #FFCC33;
+}
+
+#slider12c .slider-track-high {
+	background: #cc0000;
+}
+
+.detail-title {
+	font-weight: 600;
+}
+
+.list-url {
+	margin-top: 10px;
+	height: 265px;
+	/*overflow-y: scroll;
+	overflow-x: hidden;
+	overflow-y: auto;*/
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+.list-url .alert {
+	padding: 4px 4px;
+	margin-bottom: 5px;
+	line-height: 21px;
+}
+
+.list-url .close {
+	position: relative;
+	margin: 0px 0px 0px 0px;
+	width: 30px;
+	left: 10px;
+	padding: 0;
+}
+
+.list-url .mCSB_scrollTools {
+	/*margin-left: -8px;*/
+	left: 260px;
+}
+
+#statusWrap {
+	width: 100px;
+	margin-bottom: 10px;
+}
+
+.detail-title {
+	margin-bottom: 10px;
+}
+
+.mCSB_container.disabled div {
+	text-decoration: line-through;
+	background-color: #dddddd;
+	color: black;
+	border-color: #dddddd;
+}
+
+.tab-content {
+	padding-top: 20px;
+}
+
+.btn-group-toggle .btn-primary {
+	background-color: var(--red);
+	border-color: var(--red);
+	opacity: 0.35;
+}
+
+.btn-group-toggle .btn-primary.active {
+	background-color: var(--green) !important;
+	border-color: var(--green) !important;
+	opacity: 1;
+}
+
+#advanced {
+	height: 400px;
+}
+
+.settings {
+	padding-top: 20px;
+	width: 268px;
+}
+
+label.editorHook {
+	padding-top: 15px;
+}
+
+#editorHook {
+	width: 77px;
+}
+
+.settings button.dropdown-toggle {
+	width: 100px;
+}

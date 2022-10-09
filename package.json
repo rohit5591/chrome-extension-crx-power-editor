@@ -1,18 +1,27 @@
 {
     "name": "chrome-extension-crx-power-editor",
     "version": "1.1.0",
+    "author": "Rohit Nagare",
+    "license": "MIT",
     "description": "Chrome Extension for CRX/DE",
     "scripts": {
         "init-repo": "node ./src/scripts/init-repo.js",
         "build-repo": "node ./src/scripts/build-repo.js"
     },
     "devDependencies": {
+        "@codemirror/buildhelper": "^0.1.5",
+        "builddocs": "^1.0.0",
+        "esmoduleserve": "^0.2.0",
+        "getdocs-ts": "^0.1.0",
+        "serve-static": "^1.14.1",
         "shelljs": "^0.8.5",
         "fs-extra": "~10.1.0"
     },
-    "author": "Rohit Nagare",
-    "license": "MIT",
     "dependencies": {
+        "@rollup/plugin-node-resolve": "^14.1.0",
+        "rollup": "^2.79.1",
+        "rollup-plugin-babel-minify": "^10.0.0",
+        "rollup-plugin-import-css": "^3.0.3",
         "monaco-editor": "^0.34.0",
         "monaco-themes": "^0.4.2",
         "thememirror": "^2.0.1"

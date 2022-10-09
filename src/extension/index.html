@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="panel.css">
+
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="panel.js"></script>
+</head>
+
+<body>
+    <form id="mainfrom">
+        <fieldset>
+            <legend>AEM CRX - Power Editor</legend>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#basic" role="tab" data-toggle="tab">Basic</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#advanced" role="tab" data-toggle="tab">Editor</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane in active" id="basic">
+                    <div class="input-group input-group-sm status-area">
+                        <div class="btn-group-toggle" data-toggle="buttons">
+                            <label id="statusWrap" class="btn btn-success active">
+                                <span id="lbStatus">Enable</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="detail-title">Add Url:</div>
+                    <div class="url-input-area">
+                        <div class="input-group input-group-sm">
+                            <input id="txtUrl" type="text" class="form-control" placeholder="Add Url...">
+                            <span class="input-group-append">
+                                <button id="btnAdd" class="btn btn-primary" type="button">Add</button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="list-url mCustomScrollbar _mCS_1 mCS_no_scrollbar"
+                        style="position: relative; overflow: visible;">
+                        <div id="mCSB_1" class="mCustomScrollBox mCS-dark mCSB_vertical mCSB_outside"
+                            style="max-height: none;" tabindex="0">
+                            <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                style="position:relative; top:0; left:0;" dir="ltr"></div>
+                        </div>
+                        <div id="mCSB_1_scrollbar_vertical"
+                            class="mCSB_scrollTools mCSB_1_scrollbar mCS-dark mCSB_scrollTools_vertical"
+                            style="display: none;">
+                            <div class="mCSB_draggerContainer">
+                                <div id="mCSB_1_dragger_vertical" class="mCSB_dragger"
+                                    style="position: absolute; min-height: 30px; top: 0px;">
+                                    <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                                </div>
+                                <div class="mCSB_draggerRail"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="advanced">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn editor-toggle btn-primary active">
+                            <input type="radio" name="options" id="editorType-vs" autocomplete="off" checked> Visual
+                            Studio
+                        </label>
+                        <label class="btn editor-toggle btn-primary">
+                            <input type="radio" name="options" id="editorType-codeMirror" autocomplete="off"> Code
+                            Mirror
+                        </label>
+                    </div>
+
+                    <div class="settings settings-editorType-vs">
+                        <label for="editorType-vs-theme" class="form-label">Theme:</label>
+                        <select class="form-select theme-picker" id="editorType-vs-theme" name="editorType-theme">
+                            <option value="vs">Visual Studio</option>
+                            <option value="vs-dark">Visual Studio Dark</option>
+                            <option value="hc-black">High Contrast Dark</option>
+                            <option value="Active4D">Active4D</option>
+                            <option value="AllHallowsEve">All Hallows Eve</option>
+                            <option value="Amy">Amy</option>
+                            <option value="BirdsofParadise">Birds of Paradise</option>
+                            <option value="Blackboard">Blackboard</option>
+                            <option value="BrillianceBlack">Brilliance Black</option>
+                            <option value="BrillianceDull">Brilliance Dull</option>
+                            <option value="ChromeDevTools">Chrome DevTools</option>
+                            <option value="CloudsMidnight">Clouds Midnight</option>
+                            <option value="Clouds">Clouds</option>
+                            <option value="Cobalt">Cobalt</option>
+                            <option value="Cobalt2">Cobalt2</option>
+                            <option value="Dawn">Dawn</option>
+                            <option value="DominionDay">Dominion Day</option>
+                            <option value="Dracula">Dracula</option>
+                            <option value="Dreamweaver">Dreamweaver</option>
+                            <option value="Eiffel">Eiffel</option>
+                            <option value="EspressoLibre">Espresso Libre</option>
+                            <option value="GitHub">GitHub</option>
+                            <option value="IDLE">IDLE</option>
+                            <option value="idleFingers">idleFingers</option>
+                            <option value="iPlastic">iPlastic</option>
+                            <option value="Katzenmilch">Katzenmilch</option>
+                            <option value="krTheme">krTheme</option>
+                            <option value="KuroirTheme">Kuroir Theme</option>
+                            <option value="LAZY">LAZY</option>
+                            <option value="MagicWBAmiga">MagicWB (Amiga)</option>
+                            <option value="MerbivoreSoft">Merbivore Soft</option>
+                            <option value="Merbivore">Merbivore</option>
+                            <option value="monoindustrial">monoindustrial</option>
+                            <option value="MonokaiBright">Monokai Bright</option>
+                            <option value="Monokai">Monokai</option>
+                            <option value="NightOwl">Night Owl</option>
+                            <option value="Nord">Nord</option>
+                            <option value="OceanicNext">Oceanic Next</option>
+                            <option value="PastelsonDark">Pastels on Dark</option>
+                            <option value="SlushandPoppies">Slush and Poppies</option>
+                            <option value="Solarizeddark">Solarized-dark</option>
+                            <option value="Solarizedlight">Solarized-light</option>
+                            <option value="SpaceCadet">SpaceCadet</option>
+                            <option value="Sunburst">Sunburst</option>
+                            <option value="TextmateMacClassic">Textmate (Mac Classic)</option>
+                            <option value="TomorrowNightBlue">Tomorrow-Night-Blue</option>
+                            <option value="TomorrowNightBright">Tomorrow-Night-Bright</option>
+                            <option value="TomorrowNightEighties">Tomorrow-Night-Eighties</option>
+                            <option value="TomorrowNight">Tomorrow-Night</option>
+                            <option value="Tomorrow">Tomorrow</option>
+                            <option value="Twilight">Twilight</option>
+                            <option value="UpstreamSunburst">Upstream Sunburst</option>
+                            <option value="VibrantInk">Vibrant Ink</option>
+                            <option value="Xcodedefault">Xcode_default</option>
+                            <option value="Zenburnesque">Zenburnesque</option>
+                        </select>
+                    </div>
+                    <div class="settings settings-editorType-codeMirror">
+                        <label for="editorType-codeMirror-theme" class="form-label">Theme:</label>
+                        <select class="form-select theme-picker" id="editorType-codeMirror-theme"
+                            name="editorType-theme">
+                            <option selected="" value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="materialLight">Material Light</option>
+                            <option value="materialDark">Material Dark</option>
+                            <option value="solarizedDark">Solarized Dark</option>
+                            <option value="githubLight">Github Light</option>
+                            <option value="githubDark">Github Dark</option>
+                            <option value="aura">Aura</option>
+                            <option value="amy">Amy</option>
+                            <option value="ayuLight">Ayu Light</option>
+                            <option value="barf">Barf</option>
+                            <option value="bespin">Bespin</option>
+                            <option value="birdsOfParadise">Birds Of Paradise</option>
+                            <option value="boysAndGirls">Boys And Girls</option>
+                            <option value="clouds">Clouds</option>
+                            <option value="cobalt">Cobalt</option>
+                            <option value="coolGlow">Cool Glow</option>
+                            <option value="espresso">Espresso</option>
+                            <option value="noctisLilac">Noctis Lilac</option>
+                            <option value="rosePineDawn">Rose Pine Dawn</option>
+                            <option value="smoothy">Smoothy</option>
+                            <option value="tomorrow">Tomorrow</option>
+                            <option value="dracula1">Dracula1</option>
+                            <option value="dracula2">Dracula2</option>
+                            <option value="solarizedLight1">Solarized Light 1</option>
+                            <option value="solarizedLight2">Solarized Light 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="float-right">
+                    <button id="btnClose" type="button"
+                        class="btn btn-secondary btn-danger btn-sm pull-right">Close</button>
+                    <button id="btnCancel" type="button" class="btn btn-secondary btn-sm pull-right">Cancel</button>
+                    <button id="btnSave" type="button" class="btn btn-success btn-sm pull-right">Save</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</body>
+
+</html>
