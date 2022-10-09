@@ -6,12 +6,15 @@
     "description": "Chrome Extension for CRX/DE",
     "scripts": {
         "init-repo": "node ./src/scripts/init-repo.js",
-        "build-repo": "node ./src/scripts/build-repo.js"
+        "build-repo": "node ./src/scripts/build-repo.js",
+        "build-extension": "node ./src/scripts/build-extension.js"
     },
     "devDependencies": {
         "@codemirror/buildhelper": "^0.1.5",
         "builddocs": "^1.0.0",
         "esmoduleserve": "^0.2.0",
+        "fast-plist": "^0.1.2",
+        "jsonminify": "^0.4.2",
         "getdocs-ts": "^0.1.0",
         "serve-static": "^1.14.1",
         "shelljs": "^0.8.5",
@@ -19,6 +22,8 @@
     },
     "dependencies": {
         "@rollup/plugin-node-resolve": "^14.1.0",
+        "fast-plist": "^0.1.2",
+        "jsonminify": "^0.4.2",
         "rollup": "^2.79.1",
         "rollup-plugin-babel-minify": "^10.0.0",
         "rollup-plugin-import-css": "^3.0.3",
