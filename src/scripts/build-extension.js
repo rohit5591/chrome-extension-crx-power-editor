@@ -16,7 +16,7 @@ fs.copySync('editors/vs/monaco-editor/release/min/vs', 'dist/vs');
 fs.copySync('editors/vs/vscode-loader/src/loader.js', 'dist/vs/loader.js');
 //Build VS Themes Function
 let vsOptions = "";
-let jsonVars = "function getTheme(theme) {\n    switch(theme) {\n";
+let jsonVars = "function getVSTheme(theme) {\n    switch(theme) {\n";
 const themesPath = 'editors/vs/monaco-themes/themes/';
 const themeList = JSON.parse(fs.readFileSync(themesPath + 'themelist.json'));
 Object.keys(themeList).forEach(key => {
