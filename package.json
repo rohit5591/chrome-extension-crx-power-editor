@@ -7,7 +7,8 @@
         "build-repo": "node ./src/scripts/build-repo.js"
     },
     "devDependencies": {
-        "shelljs": "^0.8.5"
+        "shelljs": "^0.8.5",
+        "fs-extra": "~10.1.0"
     },
     "author": "Rohit Nagare",
     "license": "MIT",

@@ -1,11 +1,12 @@
 console.log("Building repo...");
 const shell = require('shelljs');
 const global = require('./global');
+const fs = require("fs-extra");
 const path = 'editors';
 const vsPath = 'vs';
 const cmPath = 'code-mirror';
 //Inject compile time overrides
-
+fs.copySync('src/overrides/compile/editors/.', './editors/.', { overwrite: true });
 shell.cd(path);
 //Initiate VS
 shell.cd(vsPath);
