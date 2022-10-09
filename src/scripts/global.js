@@ -12,10 +12,10 @@ module.exports = {
             fs.mkdirSync(dirName);
         }
     },
-    executeCommand: function (command) {
-        const command = shell.exec(command);
+    executeCommand: function (commandStr) {
+        const command = shell.exec(commandStr);
         if(command.code != 0) {
-            console.log("Some Error occured while executing : " + command);
+            console.log("Some Error occured while executing : " + commandStr);
             process.exit(1);
         }
     }
