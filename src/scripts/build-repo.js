@@ -14,7 +14,7 @@ global.executeCommand('cd vscode-loader && npm i && npm run compile && cd ..', '
 //Initiate Code Mirror and Dependent Repos
 shell.cd("..");
 shell.cd(cmPath);
-global.executeCommand('cd dev && node bin/cm.js install && npm run prepare', 'Build Code Mirror');
-global.executeCommand('cd ../codemirror-themes && npm i && npm run prepare', 'Build Code Mirror Themes');
-global.executeCommand('cd ../thememirror && npm i && npm run prepare && cd ..', 'Build Code Mirror Themes - thememirror');
+global.executeCommand('cd dev && node bin/cm.js install && npm run prepare && cd ..', 'Build Code Mirror');
+global.executeCommand('cd codemirror-themes && npm i && npm run prepare && cd ..', 'Build Code Mirror Themes');
+global.executeCommand('cd thememirror && npm i && npm run prepare && cd ..', 'Build Code Mirror Themes - thememirror');
 console.log("Repo built...");
