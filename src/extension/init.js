@@ -4,24 +4,24 @@ execute();
 
 function execute() {
     if (window.location.href.indexOf("crx/de") === -1) {
-        console.log("CRX Power Editor - Not on CRX DE");
+        log("CRX Power Editor - Not on CRX DE");
         return;
     }
     browser.storage.local.get('config', (results) => {
         if (results.config) {
             if (!results.config.isEnable) {
-                console.log("Power Editor is not enabled...");
+                log("Power Editor is not enabled...");
                 return;
             }
             if (results.config.urls.length <= 0) {
-                console.log("No site is allowed.");
+                log("No site is allowed.");
                 return;
             }
             if (results.config.urls.indexOf(window.location.origin) === -1) {
-                console.log("Site is excluded => " + window.location.origin);
+                log("Site is excluded => " + window.location.origin);
                 return;
             }
-            console.log("Initializing Power editor...");
+            log("Initializing Power editor...");
 
             createElement();
             var require = { paths: { vs: 'monaco-editor' } };
@@ -38,7 +38,7 @@ function execute() {
             }
             createElementEditorTheme(results.config.editorTheme);
 
-            console.log("Power Editor initialized.");
+            log("Power Editor initialized.");
 
         }
     });
@@ -79,4 +79,10 @@ function createEditorCssLink() {
     link.setAttribute('data-name', 'vs/editor/editor.main');
     link.setAttribute('href', chrome.runtime.getURL('vs/editor/editor.main.css'));
     document.head.appendChild(link);
+}
+
+function log(message) {
+    if (typeof powereditor !== 'undefined' || window.location.href.indexOf("?debug") !== -1) {
+        console.log(message);
+    }
 }
