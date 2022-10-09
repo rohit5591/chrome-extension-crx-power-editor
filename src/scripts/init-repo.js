@@ -3,26 +3,30 @@ const shell = require('shelljs');
 const path = 'editors';
 const vsPath = 'vs';
 const cmPath = 'code-mirror';
-const fs = require("fs");;
-if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
+const fs = require("fs");
+function clone(repo) {
+    const repoFolderName = repo.replace(/https:\/\/github\.com\/\w+\/(.*)\.git/gi, "$1");
+    if (!fs.existsSync(repoFolderName)) {
+        shell.exec('git clone ' + repo);
+    }
 }
+function mkdirIfMissing(dirName) {
+    if (!fs.existsSync(dirName)) {
+        fs.mkdirSync(dirName);
+    }
+}
+mkdirIfMissing(path);
 shell.cd(path)
-if (!fs.existsSync(vsPath)) {
-    fs.mkdirSync(vsPath);
-}
+mkdirIfMissing(vsPath);
 //Initiate VS and Dependent Repos
 shell.cd(vsPath);
-if (!fs.existsSync('monaco-editor')) {
-    shell.exec('git clone https://github.com/microsoft/monaco-editor.git');
-}
+clone('https://github.com/microsoft/monaco-editor.git');
+clone('https://github.com/brijeshb42/monaco-themes.git');
 //Initiate Code Mirror and Dependent Repos
 shell.cd("..");
-if (!fs.existsSync(cmPath)) {
-    fs.mkdirSync(cmPath);
-}
+mkdirIfMissing(cmPath);
 shell.cd(cmPath)
-if (!fs.existsSync('dev')) {
-    shell.exec('git clone https://github.com/codemirror/dev.git');
-}
+clone('https://github.com/codemirror/dev.git');
+clone('https://github.com/vadimdemedes/thememirror.git');
+clone('https://github.com/dennis84/codemirror-themes.git');
 console.log("Repo initiated...");
