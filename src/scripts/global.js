@@ -1,5 +1,7 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const shell = require('shelljs');
+const UglifyJS = require("uglify-js");
+const isMinified = process.argv.indexOf("--minify") !== -1 ? true : false; 
 module.exports = {
     clone: function (repo) {
         const repoFolderName = repo.replace(/https:\/\/github\.com\/\w+\/(.*)\.git/gi, "$1");
@@ -21,5 +23,12 @@ module.exports = {
         } else {
             console.log("========================Completed " + commandType + "========================");
         }
+    },
+    writeJsOutput: function(path, contents) {
+        let fileContents = contents;
+        if(isMinified) {
+            fileContents = UglifyJS.minify(contents).code;
+        }
+        fs.writeFileSync(path, fileContents);
     }
 }

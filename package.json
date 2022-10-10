@@ -7,6 +7,7 @@
     "scripts": {
         "init-repo": "node ./src/scripts/init-repo.js",
         "build-repo": "node ./src/scripts/build-repo.js",
+        "build-extension-min": "node ./src/scripts/build-extension.js --minify",
         "build-extension": "node ./src/scripts/build-extension.js"
     },
     "devDependencies": {

@@ -57,9 +57,7 @@ function executeHook() {
     if (editors != null && editors.getAttribute("editor-progress") === null) {
         const loader = document.createElement("div");
         loader.setAttribute("class", "loading editor");
-        loader.innerHTML = `<div class="progress progress-striped active">
-            <div class="bar"></div>
-        </div>`;
+        loader.innerHTML = `<div class="progress progress-striped active"><div class="bar"></div></div>`;
         editors.prepend(loader);
         editors.setAttribute("editor-progress", "true");
     }
