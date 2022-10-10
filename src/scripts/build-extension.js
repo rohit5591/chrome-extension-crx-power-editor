@@ -1,8 +1,8 @@
 const fs = require("fs-extra");
-const shell = require('shelljs');
-const path = require('path');
-const glob = require('glob');
-var jsonminify = require("jsonminify");
+const UglifyJS = require("uglify-js");
+const jsonminify = require("jsonminify");
+let powerEditorCode = fs.readFileSync('src/core/power-editor.js');
+let extensionIndexHtml = fs.readFileSync('src/extension/index.html');
 
 fs.removeSync('dist');
 fs.mkdirSync('dist');
@@ -29,8 +29,11 @@ Object.keys(themeList).forEach(key => {
     jsonVars += "            monaco.editor.setTheme(\"" + themeKey + "\");\n";
     jsonVars += "            return theme;\n";
     jsonVars += "        }\n";
-    options += `<option value=\"${themeKey}\">${themeName}</option>\n`;
+    vsOptions += `<option value=\"${themeKey}\">${themeName}</option>\n`;
 });
 jsonVars += "    }\n    return theme;\n}\n"
-console.log(jsonVars);
-console.log(options);
+
+//Prepend the getVSTheme method to powerEditorCode
+powerEditorCode = jsonVars + powerEditorCode;
+//Replace themes
+extensionIndexHtml = extensionIndexHtml.replace('<!--GENERATED-THEMES-VS-->', vsOptions);
