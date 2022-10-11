@@ -421,7 +421,7 @@ const getVSTheme = (theme) => {
 		}
 
 	}
-	if (themeJson !== {}) {
+	if (Object.keys(themeJson).length > 0) {
 		monaco.editor.defineTheme(theme, themeJson);
 		monaco.editor.setTheme(theme);
 	}
