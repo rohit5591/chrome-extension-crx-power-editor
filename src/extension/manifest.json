@@ -21,7 +21,6 @@
             ],
             "run_at": "document_start",
             "css": [
-                "vs/editor/editor.main.css",
                 "editor.init.css"
             ],
             "js": [
@@ -38,33 +37,9 @@
                 "/endorsed/CodeMirror2/mode/htmlembedded/htmlembedded.js",
                 "/endorsed/CodeMirror2/mode/javascript/javascript.js",
                 "jquery-3.4.1.min.js",
-                "editor.vs.init.js",
-                "editor.codemirror.init.js",
-                "vs/base/browser/ui/codicons/codicon/codicon.ttf",
-                "vs/editor/editor.main.css",
-                "editor.init.css",
-                "vs/loader.js",
-                "vs/editor/editor.main.nls.js",
-                "vs/editor/editor.main.js",
-                "vs/language/html/htmlMode.js",
-                "vs/language/html/htmlWorker.js",
-                "vs/language/typescript/tsMode.js",
-                "vs/language/typescript/tsWorker.js",
-                "vs/language/css/cssWorker.js",
-                "vs/language/css/cssMode.js",
-                "vs/basic-languages/javascript/javascript.js",
-                "vs/basic-languages/html/html.js",
-                "vs/basic-languages/css/css.js",
-                "vs/basic-languages/typescript/typescript.js",
-                "vs/basic-languages/yaml/yaml.js",
-                "vs/basic-languages/shell/shell.js",
-                "vs/basic-languages/sql/sql.js",
-                "vs/basic-languages/java/java.js",
-                "vs/basic-languages/less/less.js",
-                "vs/basic-languages/scss/scss.js",
-                "vs/basic-languages/markdown/markdown.js",
-                "vs/basic-languages/xml/xml.js",
-                "vs/basic-languages/handlebars/handlebars.js"
+                "power-editor/app.js",
+                "power-editor/app.css",
+                "editor.init.css"
             ],
             "matches": [
                 "<all_urls>"

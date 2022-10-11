@@ -26,20 +26,14 @@ function execute() {
             createElement();
             var require = { paths: { vs: 'monaco-editor' } };
             if(results.config?.editorType == "editorType-codeMirror"){
-                createScript(chrome.runtime.getURL("editor.codemirror.init.js"));
                 createElementEditorType('cm');
             } else {
                 createEditorCssLink();
-                createScript(chrome.runtime.getURL("vs/loader.js"));
-                createScript(chrome.runtime.getURL("vs/editor/editor.main.nls.js"));
-                createScript(chrome.runtime.getURL("vs/editor/editor.main.js"));
-                createScript(chrome.runtime.getURL("editor.vs.init.js"));
                 createElementEditorType('vs');
             }
             createElementEditorTheme(results.config.editorTheme);
-
+            createScript(chrome.runtime.getURL("power-editor/app.js"));
             log("Power Editor initialized.");
-
         }
     });
 }
