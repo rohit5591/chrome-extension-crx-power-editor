@@ -37,8 +37,6 @@
                 "/endorsed/CodeMirror2/mode/htmlembedded/htmlembedded.js",
                 "/endorsed/CodeMirror2/mode/javascript/javascript.js",
                 "jquery-3.4.1.min.js",
-                "power-editor/app.js",
-                "power-editor/app.css",
                 "editor.init.css"
             ],
             "matches": [

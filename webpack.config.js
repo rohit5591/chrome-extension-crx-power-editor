@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const rimraf = require('rimraf');
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const fs = require("fs-extra");
 
 module.exports = {
 	entry: './src/core/index.js',
@@ -40,9 +41,13 @@ module.exports = {
 		}),
 		new (class {
 			apply(compiler) {
-				compiler.hooks.done.tap('Remove LICENSE', () => {
+				compiler.hooks.done.tap('Adjust files', () => {
 					console.log('Remove LICENSE.txt');
 					rimraf.sync('./dist/**/*.LICENSE.txt');
+					console.log('Adjust manifest');
+					let manifest = JSON.parse(fs.readFileSync('./src/core/manifest-template.json', { encoding: 'utf8' }));
+					
+					console.log(manifest.web_accessible_resources.resources);
 				});
 			}
 		})(),
