@@ -28,7 +28,6 @@ function execute() {
             if(results.config?.editorType == "editorType-codeMirror"){
                 createElementEditorType('cm');
             } else {
-                createEditorCssLink();
                 createElementEditorType('vs');
             }
             createElementEditorTheme(results.config.editorTheme);
@@ -66,13 +65,6 @@ function createElementEditorTheme(theme) {
     input.setAttribute('id', 'editorTheme');
     input.setAttribute('value', theme);
     document.body.appendChild(input);
-}
-function createEditorCssLink() {
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('data-name', 'vs/editor/editor.main');
-    link.setAttribute('href', chrome.runtime.getURL('vs/editor/editor.main.css'));
-    document.head.appendChild(link);
 }
 
 function log(message) {

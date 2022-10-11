@@ -8,7 +8,7 @@ const fs = require("fs-extra");
 
 module.exports = {
 	entry: './src/core/index.js',
-	mode: 'production',
+	mode: 'development',
 	output: {
 		path: path.resolve(__dirname, 'dist/power-editor'),
 		filename: 'app.js'
@@ -46,8 +46,11 @@ module.exports = {
 					rimraf.sync('./dist/**/*.LICENSE.txt');
 					console.log('Adjust manifest');
 					let manifest = JSON.parse(fs.readFileSync('./src/core/manifest-template.json', { encoding: 'utf8' }));
-					
-					console.log(manifest.web_accessible_resources.resources);
+					let files = fs.readdirSync(__dirname + '/dist/power-editor');
+					files = files.map(file => 'power-editor/' + file)
+					manifest.web_accessible_resources[0].resources = manifest.web_accessible_resources[0].resources.concat(files);
+					console.log(manifest.web_accessible_resources[0].resources);
+					fs.writeFileSync(__dirname + '/dist/manifest.json', JSON.stringify(manifest, null, "\t"));
 				});
 			}
 		})(),
