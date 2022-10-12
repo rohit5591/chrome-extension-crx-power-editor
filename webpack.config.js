@@ -8,9 +8,9 @@ const fs = require("fs-extra");
 
 module.exports = {
 	entry: {
-		main: './src/core/index.js',
-		panel: './src/extension/panel.js',
-		init: './src/extension/init.js'
+		main: './src/core/power-editor/index.js',
+		panel: './src/core/extension/panel.js',
+		init: './src/core/extension/init.js'
 	},
 	mode: 'development',
 	resolve: {
@@ -48,7 +48,7 @@ module.exports = {
 		new MonacoWebpackPlugin({ languages: ['css', 'json', 'hbs', 'txt', 'xml', 'properties', 'less', 'scss', 'javascript', 'typescript', 'markdown', 'html'] }),
 		new CopyPlugin({
 			patterns: [
-				{ from: "./src/extension", to: path.resolve(__dirname, 'dist') },
+				{ from: "./src/resources", to: path.resolve(__dirname, 'dist') },
 			],
 		}),
 		new (class {
@@ -57,7 +57,7 @@ module.exports = {
 					console.log('Remove LICENSE.txt');
 					rimraf.sync('./dist/**/*.LICENSE.txt');
 					console.log('Adjust manifest');
-					let manifest = JSON.parse(fs.readFileSync('./src/core/manifest-template.json', { encoding: 'utf8' }));
+					let manifest = JSON.parse(fs.readFileSync('./src/core/extension/manifest.json', { encoding: 'utf8' }));
 					let files = fs.readdirSync(__dirname + '/dist');
 					files = files.map(file => file)
 					manifest.web_accessible_resources[0].resources = manifest.web_accessible_resources[0].resources.concat(files);

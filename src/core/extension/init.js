@@ -1,4 +1,4 @@
-import './editor.init.css';
+import './init.css';
 var browser = browser || chrome;
 var isChrome = !browser;
 
