@@ -79,15 +79,7 @@ const isFileEmpty = (file) => {
 	});
 };
 
-const handleResizeHook = () => {
-	document.querySelectorAll('.x-tab-strip-closable').forEach(tab => {
-		if (tab.id) {
-			handleResize(tab.id.replace("editors__", "") + "_container");
-		}
-	});
-};
-
-const handleResize = (containerId) => {
+export const handleResize = (containerId) => {
 	const codeMirrorContainer = document.getElementById(containerId);
 	const parentHeight = codeMirrorContainer.closest(".x-tab-panel-body").clientHeight;
 	let containerHeight = codeMirrorContainer.clientHeight;
@@ -98,6 +90,14 @@ const handleResize = (containerId) => {
 		codeMirrorContainer.style.height = (codeMirrorContainer.closest(".x-tab-panel-body").clientHeight - 25) + "px";
 		log("Height adjusted");
 	}
+};
+
+const handleResizeHook = () => {
+	document.querySelectorAll('.x-tab-strip-closable').forEach(tab => {
+		if (tab.id) {
+			handleResize(tab.id.replace("editors__", "") + "_container");
+		}
+	});
 };
 
 const initResizeObserver = () => {

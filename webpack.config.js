@@ -8,7 +8,7 @@ const fs = require("fs-extra");
 
 module.exports = {
 	entry: './src/core/index.js',
-	mode: 'production',
+	mode: 'development',
 	resolve: {
 		extensions: ['.ts', '.js'],
 	},

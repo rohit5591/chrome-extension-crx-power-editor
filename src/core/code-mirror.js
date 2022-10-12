@@ -35,6 +35,7 @@ import { dracula as draculaCM } from '@ddietr/codemirror-themes/dracula';
 import { githubLight } from '@ddietr/codemirror-themes/github-light';
 import { githubDark } from '@ddietr/codemirror-themes/github-dark';
 import { aura } from '@ddietr/codemirror-themes/aura';
+import { handleResize } from './core';
 
 import {
 	oneDarkTheme,

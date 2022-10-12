@@ -52,6 +52,7 @@ import VibrantInk from "../../node_modules/monaco-themes/themes/Vibrant Ink.json
 import Xcode_default from "../../node_modules/monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "../../node_modules/monaco-themes/themes/Zenburnesque.json";
 import PseudoWorker from 'pseudo-worker';
+import { handleResize } from './core';
 
 
 const getVSTheme = (theme) => {
@@ -303,7 +304,7 @@ window.MonacoEnvironment = {
         if (label === 'json') {
             return new PseudoWorker(urlPrefix + 'json.worker.js');
         }
-        if (label === 'css') {
+        if (label === 'css' || label === 'scss' || label === 'less') {
             return new PseudoWorker(urlPrefix + 'css.worker.js');
         }
         if (label === 'html') {
