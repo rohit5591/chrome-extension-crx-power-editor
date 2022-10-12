@@ -279,28 +279,6 @@ const getVSTheme = (theme) => {
     return theme;
 };
 
-const initVSEditor = (tab, id, codeMirror, extension) => {
-    const editorThemeElement = document.getElementById("editorTheme");
-    const editorTheme = getVSTheme(editorThemeElement !== null ? editorThemeElement.value : 'vs');
-    const editor = monaco.editor.create(document.getElementById(id + "_container"), {
-        theme: editorTheme,
-        value: codeMirror.getValue(),
-        language: getVSName(extension),
-        automaticLayout: true,
-        scrollbar: {
-            vertical: 'visible',
-            horizontal: 'visible',
-            verticalScrollbarSize: 12,
-            horizontalScrollbarSize: 12
-        }
-    });
-    editor.getModel().onDidChangeContent((event) => {
-        codeMirror.setValue(editor.getValue());
-    });
-    tab.setAttribute("editor-initialzed", "true");
-    document.querySelector('.loading.editor').style.display = 'none';
-    handleResize(id);
-};
 const getVSName = (extension) => {
     if (extension === 'js') {
         return 'javascript';
@@ -336,4 +314,27 @@ window.MonacoEnvironment = {
         }
         return new PseudoWorker(urlPrefix + 'editor.worker.js');
     }
+};
+
+export default initVSEditor = (tab, id, codeMirror, extension) => {
+    const editorThemeElement = document.getElementById("editorTheme");
+    const editorTheme = getVSTheme(editorThemeElement !== null ? editorThemeElement.value : 'vs');
+    const editor = monaco.editor.create(document.getElementById(id + "_container"), {
+        theme: editorTheme,
+        value: codeMirror.getValue(),
+        language: getVSName(extension),
+        automaticLayout: true,
+        scrollbar: {
+            vertical: 'visible',
+            horizontal: 'visible',
+            verticalScrollbarSize: 12,
+            horizontalScrollbarSize: 12
+        }
+    });
+    editor.getModel().onDidChangeContent((event) => {
+        codeMirror.setValue(editor.getValue());
+    });
+    tab.setAttribute("editor-initialzed", "true");
+    document.querySelector('.loading.editor').style.display = 'none';
+    handleResize(id);
 };

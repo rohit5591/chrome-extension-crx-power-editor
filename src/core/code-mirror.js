@@ -124,7 +124,27 @@ const getCMTheme = (theme) => {
 	}
 };
 
-const initCMEditor = (tab, id, codeMirror, extension) => {
+const getCMType = (extension) => {
+	switch (extension) {
+		case "js":
+			return [javascript()];
+		case "css":
+			return [css()];
+		case "json":
+			return [json()];
+		case "html":
+			return [html()];
+		case "sql":
+			return [sql()];
+		case "md":
+			return [markdown()];
+		case "xml":
+			return [xml()];
+	}
+	return [];
+};
+
+export default initCMEditor = (tab, id, codeMirror, extension) => {
 	let theme = [];
 	const editorThemeElement = document.getElementById("editorTheme");
 	if (editorThemeElement !== null && editorThemeElement?.value) {
@@ -149,23 +169,4 @@ const initCMEditor = (tab, id, codeMirror, extension) => {
 	tab.setAttribute("editor-initialzed", "true");
 	document.querySelector('.loading.editor').style.display = 'none';
 	handleResize(id);
-};
-const getCMType = (extension) => {
-	switch (extension) {
-		case "js":
-			return [javascript()];
-		case "css":
-			return [css()];
-		case "json":
-			return [json()];
-		case "html":
-			return [html()];
-		case "sql":
-			return [sql()];
-		case "md":
-			return [markdown()];
-		case "xml":
-			return [xml()];
-	}
-	return [];
 };
