@@ -7,14 +7,26 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const fs = require("fs-extra");
 
 module.exports = {
-	entry: './src/core/index.js',
+	entry: {
+		main: './src/core/index.js',
+		panel: './src/extension/panel.js',
+		init: './src/extension/init.js'
+	},
 	mode: 'development',
 	resolve: {
 		extensions: ['.ts', '.js'],
 	},
 	output: {
-		path: path.resolve(__dirname, 'dist/power-editor'),
-		filename: '[name].bundle.js'
+		// chunkFilename: (pathData) => {
+		// 	console.log(pathData.chunk.name);
+		// 	return pathData.chunk.name === 'main' ? '[name].js' : '[name]/[name].js';
+		//   },
+		  filename: (pathData) => {
+				console.log(pathData.chunk.name);
+			return pathData.chunk.name === 'main' ? './dist/power-editor/[name].bundle.js' : './dist/[name].js';
+		  },
+		// path: path.resolve(__dirname, 'dist/power-editor'),
+		// filename: '[name].bundle.js'
 	},
 	module: {
 		rules: [
@@ -39,7 +51,7 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({
-			filename: "app.css",
+			filename: "[name].css",
 		}),
 		new MonacoWebpackPlugin({ languages: ['css', 'json', 'hbs', 'txt', 'xml', 'properties', 'less', 'scss', 'javascript', 'typescript', 'markdown', 'html'] }),
 		new CopyPlugin({

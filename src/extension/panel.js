@@ -1,3 +1,4 @@
+import $ from "jquery";
 var isChrome = !browser;
 var browser = browser || chrome;
 var config = config || { urls: ['http://localhost:4502'], isEnable: false, editorType: "editorType-vs", editorTheme: 'vs', editorHook: 750 };
