@@ -28,13 +28,21 @@ function execute() {
             if(results.config?.editorType == "editorType-codeMirror"){
                 createElementEditorType('cm');
             } else {
+                createEditorCssLink();
                 createElementEditorType('vs');
             }
             createElementEditorTheme(results.config.editorTheme);
-            createScript(chrome.runtime.getURL("power-editor/app.js"));
+            createScript(chrome.runtime.getURL("power-editor/main.bundle.js"));
             log("Power Editor initialized.");
         }
     });
+}
+function createEditorCssLink() {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('data-name', 'power-editor/vs/editor/editor.main');
+    link.setAttribute('href', chrome.runtime.getURL('power-editor/app.css'));
+    document.head.appendChild(link);
 }
 
 function createScript(url) {

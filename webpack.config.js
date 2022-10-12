@@ -8,10 +8,13 @@ const fs = require("fs-extra");
 
 module.exports = {
 	entry: './src/core/index.js',
-	mode: 'development',
+	mode: 'production',
+	resolve: {
+		extensions: ['.ts', '.js'],
+	},
 	output: {
 		path: path.resolve(__dirname, 'dist/power-editor'),
-		filename: 'app.js'
+		filename: '[name].bundle.js'
 	},
 	module: {
 		rules: [
@@ -24,7 +27,12 @@ module.exports = {
 			},
 			{
 				test: /\.ttf$/,
-				type: 'asset/resource'
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: "[name].[ext]"
+					}
+				}
 			}
 		]
 	},
@@ -33,7 +41,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: "app.css",
 		}),
-		new MonacoWebpackPlugin({ languages: ['css', 'json', 'hbs', 'properties', 'less', 'scss', 'javascript', 'typescript', 'markdown', 'html'] }),
+		new MonacoWebpackPlugin({ languages: ['css', 'json', 'hbs', 'txt', 'xml', 'properties', 'less', 'scss', 'javascript', 'typescript', 'markdown', 'html'] }),
 		new CopyPlugin({
 			patterns: [
 				{ from: "./src/extension", to: "../." },
@@ -49,7 +57,6 @@ module.exports = {
 					let files = fs.readdirSync(__dirname + '/dist/power-editor');
 					files = files.map(file => 'power-editor/' + file)
 					manifest.web_accessible_resources[0].resources = manifest.web_accessible_resources[0].resources.concat(files);
-					console.log(manifest.web_accessible_resources[0].resources);
 					fs.writeFileSync(__dirname + '/dist/manifest.json', JSON.stringify(manifest, null, "\t"));
 				});
 			}

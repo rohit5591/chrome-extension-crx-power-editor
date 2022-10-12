@@ -1,4 +1,4 @@
-import * as monaco from 'monaco-editor';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { EditorView, basicSetup } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { syntaxHighlighting } from '@codemirror/language'
@@ -9,6 +9,7 @@ import { json } from "../../node_modules/@codemirror/lang-json";
 import { sql } from "../../node_modules/@codemirror/lang-sql";
 import { EditorState } from "@codemirror/state";
 import { markdown } from "@codemirror/lang-markdown";
+import PseudoWorker from 'pseudo-worker';
 import {
 	amy,
 	ayuLight,
@@ -94,86 +95,87 @@ import UpstreamSunburst from "../../node_modules/monaco-themes/themes/Upstream S
 import VibrantInk from "../../node_modules/monaco-themes/themes/Vibrant Ink.json";
 import Xcode_default from "../../node_modules/monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "../../node_modules/monaco-themes/themes/Zenburnesque.json";
+import { Extension } from 'typescript';
 
 const getCMTheme = (theme) => {
 	switch (theme) {
 		case "amy": {
-			return amy();
+			return amy;
 		}
 		case "ayuLight": {
-			return ayuLight();
+			return ayuLight;
 		}
 		case "barf": {
-			return barf();
+			return barf;
 		}
 		case "bespin": {
-			return bespin();
+			return bespin;
 		}
 		case "birdsOfParadise": {
-			return birdsOfParadise();
+			return birdsOfParadise;
 		}
 		case "boysAndGirls": {
-			return boysAndGirls();
+			return boysAndGirls;
 		}
 		case "clouds": {
-			return clouds();
+			return clouds;
 		}
 		case "cobalt": {
-			return cobalt();
+			return cobalt;
 		}
 		case "coolGlow": {
-			return coolGlow();
+			return coolGlow;
 		}
 		case "dracula1": {
-			return dracula();
+			return dracula;
 		}
 		case "espresso": {
-			return espresso();
+			return espresso;
 		}
 		case "noctisLilac": {
-			return noctisLilac();
+			return noctisLilac;
 		}
 		case "rosePineDawn": {
-			return rosePineDawn();
+			return rosePineDawn;
 		}
 		case "smoothy": {
-			return smoothy();
+			return smoothy;
 		}
 		case "solarizedLight1": {
-			return solarizedLight();
+			return solarizedLight;
 		}
 		case "tomorrow": {
-			return tomorrow();
+			return tomorrow;
 		}
 		case "dark": {
 			return syntaxHighlighting([oneDarkTheme, oneDarkHighlightStyle], { fallback: true });
 		}
 		case "materialLight": {
-			return materialLight();
+			return materialLight;
 		}
 		case "materialDark": {
-			return materialDark();
+			return materialDark;
 		}
 		case "solarizedLight2": {
-			return solarizedLightCM();
+			return solarizedLightCM;
 		}
 		case "solarizedDark": {
-			return solarizedDark();
+			return solarizedDark;
 		}
 		case "dracula2": {
-			return draculaCM();
+			return draculaCM;
 		}
 		case "githubLight": {
-			return githubLight();
+			return githubLight;
 		}
 		case "githubDark": {
-			return githubDark();
+			return githubDark;
 		}
 		case "aura": {
-			return aura();
+			return aura;
 		}
 		default: {
-			return ayuLight();
+			return [];
 		}
 	}
 };
@@ -636,4 +638,23 @@ let initEditor = initVSEditor;
 if (typeOfEditorElement && typeOfEditorElement?.value == 'cm') {
 	initEditor = initCMEditor;
 }
+
+const urlPrefix = document.getElementById('plugin-prefix').value + 'power-editor/';
+window.MonacoEnvironment = {
+	getWorker: function (moduleId, label) {
+		if (label === 'json') {
+			return new Worker(urlPrefix + 'json.worker.js');
+		}
+		if (label === 'css') {
+			return new Worker(urlPrefix + 'css.worker.js');
+		}
+		if (label === 'html') {
+			return new Worker(urlPrefix + 'html.worker.js');
+		}
+		if (label === 'typescript' || label === 'javascript') {
+			return new Worker(urlPrefix + 'ts.worker.js');
+		}
+		return new Worker(urlPrefix + 'editor.worker.js');
+	}
+};
 observeCRXInitiated();
