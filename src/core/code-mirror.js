@@ -144,7 +144,7 @@ const getCMType = (extension) => {
 	return [];
 };
 
-export default initCMEditor = (tab, id, codeMirror, extension) => {
+export const initCMEditor = (tab, id, codeMirror, extension) => {
 	let theme = [];
 	const editorThemeElement = document.getElementById("editorTheme");
 	if (editorThemeElement !== null && editorThemeElement?.value) {

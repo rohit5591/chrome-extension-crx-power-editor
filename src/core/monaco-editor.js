@@ -316,7 +316,7 @@ window.MonacoEnvironment = {
     }
 };
 
-export default initVSEditor = (tab, id, codeMirror, extension) => {
+export const initVSEditor = (tab, id, codeMirror, extension) => {
     const editorThemeElement = document.getElementById("editorTheme");
     const editorTheme = getVSTheme(editorThemeElement !== null ? editorThemeElement.value : 'vs');
     const editor = monaco.editor.create(document.getElementById(id + "_container"), {

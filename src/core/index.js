@@ -1,5 +1,5 @@
-import initVSEditor from './monaco-editor';
-import initCMEditor from './code-mirror';
+import { initVSEditor } from './monaco-editor';
+import { initCMEditor } from './code-mirror';
 import { createEditor } from './core';
 
 const typeOfEditorElement = document.getElementById('editorType');
