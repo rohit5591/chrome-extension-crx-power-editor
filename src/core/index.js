@@ -643,18 +643,18 @@ const urlPrefix = document.getElementById('plugin-prefix').value + 'power-editor
 window.MonacoEnvironment = {
 	getWorker: function (moduleId, label) {
 		if (label === 'json') {
-			return new Worker(urlPrefix + 'json.worker.js');
+			return new PseudoWorker(urlPrefix + 'json.worker.js');
 		}
 		if (label === 'css') {
-			return new Worker(urlPrefix + 'css.worker.js');
+			return new PseudoWorker(urlPrefix + 'css.worker.js');
 		}
 		if (label === 'html') {
-			return new Worker(urlPrefix + 'html.worker.js');
+			return new PseudoWorker(urlPrefix + 'html.worker.js');
 		}
 		if (label === 'typescript' || label === 'javascript') {
-			return new Worker(urlPrefix + 'ts.worker.js');
+			return new PseudoWorker(urlPrefix + 'ts.worker.js');
 		}
-		return new Worker(urlPrefix + 'editor.worker.js');
+		return new PseudoWorker(urlPrefix + 'editor.worker.js');
 	}
 };
 observeCRXInitiated();
