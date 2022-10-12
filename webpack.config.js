@@ -5,6 +5,7 @@ const rimraf = require('rimraf');
 const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const fs = require("fs-extra");
+const manifest_exclude = ["icon.png", "index.html", "LICENSE", "panel.js", "panel.css", "README.md"];
 
 module.exports = {
 	entry: {
@@ -59,7 +60,7 @@ module.exports = {
 					console.log('Adjust manifest');
 					let manifest = JSON.parse(fs.readFileSync('./src/core/extension/manifest.json', { encoding: 'utf8' }));
 					let files = fs.readdirSync(__dirname + '/dist');
-					files = files.map(file => file)
+					files = files.filter(file => manifest_exclude.indexOf(file) === -1)
 					manifest.web_accessible_resources[0].resources = manifest.web_accessible_resources[0].resources.concat(files);
 					fs.writeFileSync(__dirname + '/dist/manifest.json', JSON.stringify(manifest, null, "\t"));
 				});
