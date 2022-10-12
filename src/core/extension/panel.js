@@ -2,13 +2,14 @@ import jquery from "jquery";
 import "@popperjs/core";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js";
+import "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css";
+import "jquery-mousewheel/jquery.mousewheel.js";
 import './panel.css';
 
 window.jquery = jquery;
 window.$ = jquery;
 window.bootstrap = bootstrap;
-require("jquery-mousewheel")($);
-require('malihu-custom-scrollbar-plugin')($);
 
 var isChrome = !browser;
 var browser = browser || chrome;

@@ -52,9 +52,11 @@
     },
     "dependencies": {
         "malihu-custom-scrollbar-plugin": "^3.1.5",
+        "imports-loader": "^4.0.1",
         "@rollup/plugin-node-resolve": "^14.1.0",
         "fast-plist": "^0.1.2",
         "jsonminify": "^0.4.2",
+        "jquery-mousewheel": "^3.1.13",
         "jquery": "^3.6.1",
         "@popperjs/core": "^2.11.6",
         "bootstrap": "^5.2.2",

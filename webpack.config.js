@@ -13,7 +13,7 @@ module.exports = {
 		panel: './src/core/extension/panel.js',
 		init: './src/core/extension/init.js'
 	},
-	mode: 'development',
+	mode: 'production',
 	resolve: {
 		extensions: ['.ts', '.js'],
 	},
@@ -31,14 +31,46 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.ttf$/,
+				test: /\.(ttf|png)$/,
 				use: {
 					loader: 'file-loader',
 					options: {
 						name: "[name].[ext]"
 					}
 				}
-			}
+			},
+			// {
+			// 	test: /jquery-mousewheel/,
+			// 	use: [
+			// 		{
+			// 			loader: "imports-loader",
+			// 			options: {
+			// 				imports: {
+			// 					moduleName: "jquery-mousewheel",
+			// 					name: "$",
+			// 				},
+			// 				wrapper: "window",
+			// 				additionalCode: "var define = false;",
+			// 			},
+			// 		},
+			// 	],
+			// },
+			// {
+			// 	test: /jquery-mousewheel/,
+			// 	use: [
+			// 		{
+			// 			loader: "imports-loader",
+			// 			options: {
+			// 				imports: {
+			// 					moduleName: "malihu-custom-scrollbar-plugin",
+			// 					name: "$",
+			// 				},
+			// 				wrapper: "window",
+			// 				additionalCode: "var define = false;",
+			// 			},
+			// 		},
+			// 	],
+			// },
 		]
 	},
 	plugins: [
@@ -56,7 +88,7 @@ module.exports = {
 			apply(compiler) {
 				compiler.hooks.done.tap('Adjust files', () => {
 					console.log('Remove LICENSE.txt');
-					rimraf.sync('./dist/**/*.LICENSE.txt');
+					//rimraf.sync('./dist/**/*.LICENSE.txt');
 					console.log('Adjust manifest');
 					let manifest = JSON.parse(fs.readFileSync('./src/core/extension/manifest.json', { encoding: 'utf8' }));
 					let files = fs.readdirSync(__dirname + '/dist');
