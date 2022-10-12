@@ -1,3 +1,4 @@
+import './editor.init.css';
 var browser = browser || chrome;
 var isChrome = !browser;
 
@@ -29,7 +30,7 @@ const execute = () => {
             }
             createElementEditorType(results.config.editorType);
             createElementEditorTheme(results.config.editorTheme);
-            createScript(chrome.runtime.getURL("power-editor/main.bundle.js"));
+            createScript(chrome.runtime.getURL("main.js"));
             log("Power Editor initialized.");
         }
     });
@@ -37,8 +38,8 @@ const execute = () => {
 const createEditorCssLink = () => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('data-name', 'power-editor/vs/editor/editor.main');
-    link.setAttribute('href', chrome.runtime.getURL('power-editor/app.css'));
+    link.setAttribute('data-name', 'vs/editor/editor.main');
+    link.setAttribute('href', chrome.runtime.getURL('main.css'));
     document.head.appendChild(link);
 };
 

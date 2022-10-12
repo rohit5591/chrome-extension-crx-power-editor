@@ -1,11 +1,11 @@
 import { EditorView, basicSetup } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { syntaxHighlighting } from '@codemirror/language'
-import { html } from "../../node_modules/@codemirror/lang-html";
-import { css } from "../../node_modules/@codemirror/lang-css";
-import { xml } from "../../node_modules/@codemirror/lang-xml";
-import { json } from "../../node_modules/@codemirror/lang-json";
-import { sql } from "../../node_modules/@codemirror/lang-sql";
+import { html } from "@codemirror/lang-html";
+import { css } from "@codemirror/lang-css";
+import { xml } from "@codemirror/lang-xml";
+import { json } from "@codemirror/lang-json";
+import { sql } from "@codemirror/lang-sql";
 import { EditorState } from "@codemirror/state";
 import { markdown } from "@codemirror/lang-markdown";
 import {

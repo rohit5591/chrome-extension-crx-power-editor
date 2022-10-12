@@ -21,7 +21,7 @@
             ],
             "run_at": "document_start",
             "css": [
-                "editor.init.css"
+                "init.css"
             ],
             "js": [
                 "init.js"
@@ -35,8 +35,7 @@
                 "/endorsed/CodeMirror2/mode/html/html.js",
                 "/endorsed/CodeMirror2/mode/txt/txt.js",
                 "/endorsed/CodeMirror2/mode/htmlembedded/htmlembedded.js",
-                "/endorsed/CodeMirror2/mode/javascript/javascript.js",
-                "editor.init.css"
+                "/endorsed/CodeMirror2/mode/javascript/javascript.js"
             ],
             "matches": [
                 "<all_urls>"
