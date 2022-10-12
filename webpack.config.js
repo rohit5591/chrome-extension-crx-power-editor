@@ -88,7 +88,7 @@ module.exports = {
 			apply(compiler) {
 				compiler.hooks.done.tap('Adjust files', () => {
 					console.log('Remove LICENSE.txt');
-					//rimraf.sync('./dist/**/*.LICENSE.txt');
+					rimraf.sync('./dist/**/*.LICENSE.txt');
 					console.log('Adjust manifest');
 					let manifest = JSON.parse(fs.readFileSync('./src/core/extension/manifest.json', { encoding: 'utf8' }));
 					let files = fs.readdirSync(__dirname + '/dist');
