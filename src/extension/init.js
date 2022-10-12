@@ -1,5 +1,5 @@
-const browser = browser || chrome;
-const isChrome = !browser;
+var browser = browser || chrome;
+var isChrome = !browser;
 
 const execute = () => {
     if (window.location.href.indexOf("crx/de") === -1) {
