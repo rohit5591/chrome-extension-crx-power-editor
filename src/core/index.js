@@ -95,7 +95,6 @@ import UpstreamSunburst from "../../node_modules/monaco-themes/themes/Upstream S
 import VibrantInk from "../../node_modules/monaco-themes/themes/Vibrant Ink.json";
 import Xcode_default from "../../node_modules/monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "../../node_modules/monaco-themes/themes/Zenburnesque.json";
-import { Extension } from 'typescript';
 
 const getCMTheme = (theme) => {
 	switch (theme) {
