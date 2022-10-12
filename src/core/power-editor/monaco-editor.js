@@ -298,7 +298,7 @@ const getVSName = (extension) => {
     }
     return extension;
 };
-const urlPrefix = document.getElementById('plugin-prefix').value + 'power-editor/';
+const urlPrefix = document.getElementById('plugin-prefix').value;
 window.MonacoEnvironment = {
     getWorker: function (moduleId, label) {
         if (label === 'json') {
