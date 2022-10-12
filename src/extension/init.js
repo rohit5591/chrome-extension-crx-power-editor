@@ -1,8 +1,7 @@
-var isChrome = !browser;
-var browser = browser || chrome;
-execute();
+const isChrome = !browser;
+const browser = browser || chrome;
 
-function execute() {
+const execute = () => {
     if (window.location.href.indexOf("crx/de") === -1) {
         log("CRX Power Editor - Not on CRX DE");
         return;
@@ -25,58 +24,61 @@ function execute() {
 
             createElement();
             var require = { paths: { vs: 'monaco-editor' } };
-            if(results.config?.editorType == "editorType-codeMirror"){
-                createElementEditorType('cm');
-            } else {
+            if(results.config.editorType !== "editorType-codeMirror"){
                 createEditorCssLink();
-                createElementEditorType('vs');
             }
+            createElementEditorType(results.config.editorType);
             createElementEditorTheme(results.config.editorTheme);
             createScript(chrome.runtime.getURL("power-editor/main.bundle.js"));
             log("Power Editor initialized.");
         }
     });
-}
-function createEditorCssLink() {
+};
+const createEditorCssLink = () => {
     const link = document.createElement('link');
     link.setAttribute('rel', 'stylesheet');
     link.setAttribute('data-name', 'power-editor/vs/editor/editor.main');
     link.setAttribute('href', chrome.runtime.getURL('power-editor/app.css'));
     document.head.appendChild(link);
-}
+};
 
-function createScript(url) {
+const createScript = (url) => {
     if (url) {
         const script = document.createElement('script');
         script.setAttribute('src', url);
         script.setAttribute('type', "text/javascript");
         document.body.appendChild(script);
     }
-}
-function createElement() {
+};
+
+const createElement = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
     input.setAttribute('id', 'plugin-prefix');
     input.setAttribute('value', 'chrome-extension://' + chrome.runtime.id + "/");
     document.body.appendChild(input);
-}
-function createElementEditorType(type) {
+};
+
+const createElementEditorType = (type) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
     input.setAttribute('id', 'editorType');
     input.setAttribute('value', type);
     document.body.appendChild(input);
-}
-function createElementEditorTheme(theme) {
+};
+
+const createElementEditorTheme = (theme) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
     input.setAttribute('id', 'editorTheme');
     input.setAttribute('value', theme);
     document.body.appendChild(input);
-}
+};
 
-function log(message) {
+const log = (message) => {
     if (typeof powereditor !== 'undefined' || window.location.href.indexOf("?debug") !== -1) {
         console.log(message);
     }
-}
+};
+
+execute();
