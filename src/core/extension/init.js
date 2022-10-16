@@ -20,7 +20,7 @@ const execute = () => {
             var isExcluded = results.config.urls.filter(function (url) {
                 return (url.indexOf(window.location.origin) !== -1);
               }).length > 0;
-            if (isExcluded) {
+            if (!isExcluded) {
                 log("Site is excluded => " + window.location.origin);
                 return;
             }
