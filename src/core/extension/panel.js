@@ -156,7 +156,10 @@ $(window).on('load', function () {
 	initialize();
 	$(".list-url").mCustomScrollbar({
 		theme: "dark",
-		scrollbarPosition: "inside"
+		scrollbarPosition: "outside",
+		advanced: {
+			updateOnContentResize: true
+		}
 	});
 	$(".editor-toggle").on('click', function () {
 		$(".settings").hide();
