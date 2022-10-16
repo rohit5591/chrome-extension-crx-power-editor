@@ -38,39 +38,7 @@ module.exports = {
 						name: "[name].[ext]"
 					}
 				}
-			},
-			// {
-			// 	test: /jquery-mousewheel/,
-			// 	use: [
-			// 		{
-			// 			loader: "imports-loader",
-			// 			options: {
-			// 				imports: {
-			// 					moduleName: "jquery-mousewheel",
-			// 					name: "$",
-			// 				},
-			// 				wrapper: "window",
-			// 				additionalCode: "var define = false;",
-			// 			},
-			// 		},
-			// 	],
-			// },
-			// {
-			// 	test: /jquery-mousewheel/,
-			// 	use: [
-			// 		{
-			// 			loader: "imports-loader",
-			// 			options: {
-			// 				imports: {
-			// 					moduleName: "malihu-custom-scrollbar-plugin",
-			// 					name: "$",
-			// 				},
-			// 				wrapper: "window",
-			// 				additionalCode: "var define = false;",
-			// 			},
-			// 		},
-			// 	],
-			// },
+			}
 		]
 	},
 	plugins: [
