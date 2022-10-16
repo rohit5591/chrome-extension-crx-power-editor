@@ -129,3 +129,7 @@ label.editorHook {
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
 	background-color: rgb(0 0 0 / 75%);
 }
+
+.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar {
+	background-color: rgb(0 0 0 / 85%);
+}
