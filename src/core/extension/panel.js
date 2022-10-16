@@ -155,11 +155,7 @@ const loadConfig = (results) => {
 $(window).on('load', function () {
 	initialize();
 	$(".list-url").mCustomScrollbar({
-		theme: "dark",
-		scrollbarPosition: "outside",
-		advanced: {
-			updateOnContentResize: true
-		}
+		scrollbarPosition: "outside"
 	});
 	$(".editor-toggle").on('click', function () {
 		$(".settings").hide();
