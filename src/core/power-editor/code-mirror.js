@@ -128,7 +128,10 @@ const getCMTheme = (theme) => {
 const getCMType = (extension) => {
 	switch (extension) {
 		case "js":
+		case "ts":
 			return [javascript()];
+		case "scss":
+		case "less":
 		case "css":
 			return [css()];
 		case "json":
