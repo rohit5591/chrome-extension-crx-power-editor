@@ -154,9 +154,12 @@ const loadConfig = (results) => {
 
 $(window).on('load', function () {
 	initialize();
-	$(".list-url").mCustomScrollbar({
-		scrollbarPosition: "outside"
-	});
+	$(".list-url").mCustomScrollbar();
+	setTimeout(function () {
+		$("#mCSB_1_scrollbar_vertical").
+			removeClass("mCS-light").
+			addClass("mCS-dark");
+	}, 300);
 	$(".editor-toggle").on('click', function () {
 		$(".settings").hide();
 		$(".settings-" + $(this).find("input").attr("id")).show();
