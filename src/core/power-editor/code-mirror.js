@@ -1,5 +1,6 @@
 import { EditorView, basicSetup } from "codemirror";
-import { javascript } from "@codemirror/lang-javascript";
+import { javascript, esLint } from "@codemirror/lang-javascript";
+import { linter, lintGutter } from "@codemirror/lint";
 import { syntaxHighlighting } from '@codemirror/language'
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
@@ -41,6 +42,7 @@ import {
 	oneDarkTheme,
 	oneDarkHighlightStyle
 } from '@codemirror/theme-one-dark';
+import { default as eslint } from "eslint-linter-browserify";
 
 const getCMTheme = (theme) => {
 	switch (theme) {
@@ -129,7 +131,11 @@ const getCMType = (extension) => {
 	switch (extension) {
 		case "js":
 		case "ts":
-			return [javascript()];
+			return [
+				lintGutter(),
+				linter(esLint(new eslint.Linter(), config)),
+				javascript()
+			];
 		case "scss":
 		case "less":
 		case "css":
@@ -146,6 +152,21 @@ const getCMType = (extension) => {
 			return [xml()];
 	}
 	return [];
+};
+
+const config = {
+	// eslint configuration
+	parserOptions: {
+		ecmaVersion: 2019,
+		sourceType: "script",
+	},
+	env: {
+		browser: true,
+		node: true,
+	},
+	rules: {
+		semi: [1, "always"],
+	},
 };
 
 export const initCMEditor = (tab, id, codeMirror, extension) => {
