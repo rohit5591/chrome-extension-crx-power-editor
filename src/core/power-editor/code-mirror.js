@@ -165,7 +165,7 @@ const config = {
 		node: true,
 	},
 	rules: {
-		semi: [1, "always"],
+		semi: ["error", "always"],
 	},
 };
 
