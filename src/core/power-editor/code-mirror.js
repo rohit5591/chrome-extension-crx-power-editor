@@ -126,7 +126,36 @@ const getCMTheme = (theme) => {
 		}
 	}
 };
-
+const extraGlobalAttributes = {
+	"data-sly-use": null,
+	"data-sly-test": null,
+	"data-sly-include": null,
+	"data-sly-resource": null,
+	"data-sly-list": null,
+	"data-sly-repeat": null,
+	"data-sly-template": null,
+	"data-sly-call": null,
+	"data-sly-unwrap": null,
+	"data-sly-attribute": null,
+	"data-sly-set": null,
+	"data-sly-element": null,
+	"data-sly-text": null,
+};
+const htmlTagsConfig = (
+	{
+		extraTags: {
+			"sly": { 
+				attrs: extraGlobalAttributes
+			},
+			"template": {
+				attrs: {
+					"data-sly-template": null
+				}
+			}
+		},
+		extraGlobalAttributes: extraGlobalAttributes
+	}
+);
 const getCMType = (extension) => {
 	switch (extension) {
 		case "js":
@@ -143,7 +172,7 @@ const getCMType = (extension) => {
 		case "json":
 			return [json()];
 		case "html":
-			return [html()];
+			return [html(htmlTagsConfig)];
 		case "sql":
 			return [sql()];
 		case "md":
