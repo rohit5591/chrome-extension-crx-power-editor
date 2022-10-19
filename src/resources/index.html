@@ -10,18 +10,18 @@
     <form id="mainfrom">
         <fieldset>
             <legend>AEM CRX - Power Editor</legend>
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#basic" role="tab" data-toggle="tab">Basic</a>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic"
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Basic</button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#advanced" role="tab" data-toggle="tab">Editor</a>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#advanced"
+                        type="button" role="tab" aria-controls="advanced" aria-selected="false">Advanced</button>
                 </li>
             </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane in active" id="basic">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
                     <div class="input-group input-group-sm status-area">
                         <div class="btn-group-toggle" data-toggle="buttons">
                             <label id="statusWrap" class="btn btn-success active">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="advanced">
+                <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn editor-toggle btn-primary active">
                             <input type="radio" name="options" id="editorType-vs" autocomplete="off" checked> Visual
@@ -164,19 +164,16 @@
                         </select>
                     </div>
                 </div>
-                <div class="float-right">
-                    <button id="btnClose" type="button"
-                        class="btn btn-secondary btn-danger btn-sm pull-right">Close</button>
-                    <button id="btnCancel" type="button" class="btn btn-secondary btn-sm pull-right">Cancel</button>
-                    <button id="btnSave" type="button" class="btn btn-success btn-sm pull-right">Save</button>
-                </div>
             </div>
-
+            <div class="float-right">
+                <button id="btnClose" type="button"
+                    class="btn btn-secondary btn-danger btn-sm pull-right">Close</button>
+                <button id="btnCancel" type="button" class="btn btn-secondary btn-sm pull-right">Cancel</button>
+                <button id="btnSave" type="button" class="btn btn-success btn-sm pull-right">Save</button>
+            </div>
         </fieldset>
     </form>
     <script src="panel.js"></script>
-
-
 </body>
 
 </html>
