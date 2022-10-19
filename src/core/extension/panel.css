@@ -129,3 +129,8 @@ label.editorHook {
 button.nav-link {
 	width: auto !important;
 }
+
+button.delete-domain {
+	padding: 0px !important;
+    margin: 7px;
+}

@@ -88,7 +88,7 @@ const getUrl = () => {
 
 const addUrlSection = (id, value) => {
 	const url = new URL(value);
-	const content = `<div id="${id}" class="alert alert-success alert-dismissible fade show" role="alert"><span class="url-regex">${url.origin}<span/><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+	const content = `<div id="${id}" class="alert alert-success alert-dismissible fade show" role="alert"><span class="url-regex">${url.origin}</span/><button type="button" class="btn-close delete-domain" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
 	//const content = '<div id="' + id + '" class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="url-regex">' + url.origin + '<span/></div>';
 	$('.list-url .mCSB_container').prepend(content);
 };
