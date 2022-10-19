@@ -125,3 +125,7 @@ label.editorHook {
 .settings button.dropdown-toggle {
 	width: 100px;
 }
+
+button.nav-link {
+	width: auto !important;
+}
