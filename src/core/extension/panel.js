@@ -92,9 +92,9 @@ const getUrl = () => {
 	const value = $('#txtUrl').val();
 	if (isValidHttpUrl(value)) {
 		const url = new URL(value);
-		if($('.url-regex').text().indexOf(url) === -1) {
+		if($('.url-regex').text().indexOf(url.origin) === -1) {
 			$('#txtUrl').val('');
-			addUrlSection('new', url);
+			addUrlSection('new', url.origin);
 		} else {
 			triggerError('Domain already added in the list');
 		}
@@ -105,7 +105,7 @@ const getUrl = () => {
 };
 
 const addUrlSection = (id, url) => {
-	const content = `<div id="${id}" class="alert alert-success alert-dismissible fade show" role="alert"><span class="url-regex">${url.origin}</span/><button type="button" class="btn-close delete-domain" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+	const content = `<div id="${id}" class="alert alert-success alert-dismissible fade show" role="alert"><span class="url-regex">${url}</span/><button type="button" class="btn-close delete-domain" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
 	$('.list-url .mCSB_container').prepend(content);
 };
 
