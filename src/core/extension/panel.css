@@ -119,14 +119,6 @@ button {
 	width: 268px;
 }
 
-label.editorHook {
-	padding-top: 15px;
-}
-
-#editorHook {
-	width: 77px;
-}
-
 .settings button.dropdown-toggle {
 	width: 100px;
 }
@@ -145,12 +137,12 @@ button.nav-link {
 	margin: 0;
 }
 
-#pills-cm-tab {
+#editorType-cm {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
 
-#pills-vs-tab {
+#editorType-vs {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
@@ -170,7 +162,7 @@ legend {
     padding-bottom: 20px;
 }
 
-#flexSwitchCheckDefault {
+#editorEnableCheck {
 	height: 20px;
     width: 40px;
     margin-right: 10px;

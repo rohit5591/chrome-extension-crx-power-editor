@@ -14,9 +14,8 @@ var isChrome = !browser;
 var config = config || { urls: ['http://localhost:4502'], isEnable: false, editorType: "editorType-vs", editorTheme: 'vs' };
 
 $(function () {
-	$('#statusWrap').on("click", function () {
-		const isCheck = $(this).attr("class").indexOf("danger") === -1;
-		setLabelStatus(!isCheck);
+	$('#editorEnableCheck').on("change", function (e) {
+		setLabelStatus($(e.target).is(':checked'));
 	});
 
 	$('#txtUrl').on("keypress", function (e) {
@@ -31,9 +30,9 @@ $(function () {
 	});
 
 	$('#btnSave').on("click", function () {
-		const isCheck = $('#statusWrap').attr("class").indexOf("danger") === -1;
+		const isCheck = $("#editorEnableCheck").is(":checked");
 		config.isEnable = isCheck;
-		config.editorType = $('.editor-toggle.active input').attr("id");
+		config.editorType = $('#editorSwitch .nav-link.active').attr("id");
 		const urls = [];
 		$('.url-regex').each(function (index) {
 			urls.push($(this).text());
@@ -60,17 +59,8 @@ $(function () {
 
 const setLabelStatus = (isEnable) => {
 	if (isEnable) {
-		$('#lbStatus').text('Enabled')
-			.parent()
-			.removeClass('btn-danger')
-			.addClass('btn-success');
-
 		$('.mCSB_container').removeClass('disabled');
 	} else {
-		$('#lbStatus').text('Disabled')
-			.parent()
-			.removeClass('btn-success')
-			.addClass('btn-danger');
 		$('.mCSB_container').addClass('disabled');
 	}
 };
@@ -123,6 +113,7 @@ const isValidHttpUrl = (string) => {
 
 const initPopup = (config) => {
 	console.log('Init popup');
+	$('#editorEnableCheck').prop('checked', config.isEnable);
 	setLabelStatus(config.isEnable);
 
 	$('.list-url .mCSB_container').html('');
@@ -138,10 +129,11 @@ const initPopup = (config) => {
 			$("#editorType-codeMirror-theme").val(config.editorTheme);
 		}
 	}
-	$('.settings').hide();
-	$('.editor-toggle').removeClass("active");
-	$('.settings-' + config.editorType).show();
-	$('#' + config.editorType).parent().addClass("active");
+	if (config.editorType === "editorType-codeMirror") {
+		$('#editorType-codeMirror').trigger('click');
+	} else {
+		$('#editorType-vs').trigger('click');
+	}
 };
 
 const onError = (error) => {

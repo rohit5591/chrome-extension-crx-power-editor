@@ -22,16 +22,9 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
-                    <!-- <div class="input-group input-group-sm status-area">
-                        <div class="btn-group-toggle" data-toggle="buttons">
-                            <label id="statusWrap" class="btn btn-success active">
-                                <span id="lbStatus">Enable</span>
-                            </label>
-                        </div>
-                    </div> -->
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Enable Power Editor</label>
+                        <input class="form-check-input" type="checkbox" role="switch" id="editorEnableCheck">
+                        <label class="form-check-label" for="editorEnableCheck">Enable Power Editor</label>
                     </div>
                     <div class="detail-title">Add Url:</div>
                     <div class="url-input-area position-relative">
@@ -69,19 +62,19 @@
                 <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
                     <ul class="nav nav-pills mb-3 btn-group-toggle" id="editorSwitch" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-vs-tab" data-bs-toggle="pill"
+                            <button class="nav-link" id="editorType-vs" data-bs-toggle="pill"
                                 data-bs-target="#pills-vs" type="button" role="tab" aria-controls="pills-vs"
                                 aria-selected="true">Visual Studio</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-cm-tab" data-bs-toggle="pill" data-bs-target="#pills-cm"
+                            <button class="nav-link" id="editorType-codeMirror" data-bs-toggle="pill" data-bs-target="#pills-cm"
                                 type="button" role="tab" aria-controls="pills-cm" aria-selected="false">Code
                                 Mirror</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-vs" role="tabpanel"
-                            aria-labelledby="pills-vs-tab">
+                        <div class="tab-pane fade" id="pills-vs" role="tabpanel"
+                            aria-labelledby="editorType-vs">
                             <label for="editorType-vs-theme" class="form-label">Theme:</label>
                             <select class="form-select theme-picker form-select-sm" id="editorType-vs-theme" name="editorType-theme">
                                 <option value="vs">Visual Studio</option>
@@ -141,7 +134,7 @@
                                 <option value="Zenburnesque">Zenburnesque</option>
                             </select>
                         </div>
-                        <div class="tab-pane fade" id="pills-cm" role="tabpanel" aria-labelledby="pills-cm-tab">
+                        <div class="tab-pane fade" id="pills-cm" role="tabpanel" aria-labelledby="editorType-codeMirror">
                             <label for="editorType-codeMirror-theme" class="form-label">Theme:</label>
                             <select class="form-select theme-picker form-select-sm" id="editorType-codeMirror-theme"
                                 name="editorType-theme">
