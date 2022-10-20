@@ -31,6 +31,15 @@ button {
 
 #btnAdd {
 	margin-left: 0px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	height: 31px;
+	width: 50px;
+    padding: 0;
+}
+
+#txtUrl {
+	height: 31px;
 }
 
 #slider12c .slider-track-low {
@@ -51,7 +60,7 @@ button {
 
 .list-url {
 	margin-top: 10px;
-	height: 262px;
+	height: 269px;
 	margin-bottom: 10px;
 	overflow: auto;
 }
@@ -59,7 +68,7 @@ button {
 .list-url .alert {
 	padding: 0px;
 	margin-bottom: 5px;
-	line-height: 21px;
+	line-height: 25px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -169,4 +178,11 @@ legend {
 .form-check-input:checked {
     background-color: var(--bs-success);
     border-color: var(--bs-success);
+}
+
+#alert {
+	margin-left: 0px !important;
+    margin-right: 0px !important;
+    position: absolute;
+    z-index: 1;
 }
