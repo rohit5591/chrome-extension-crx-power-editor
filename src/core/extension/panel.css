@@ -154,3 +154,15 @@ legend {
 #myTab {
 	padding-top: 10px;
 }
+
+.form-check.form-switch {
+	display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+#flexSwitchCheckDefault {
+	height: 20px;
+    width: 40px;
+    margin-right: 10px;
+}
