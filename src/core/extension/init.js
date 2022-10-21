@@ -26,7 +26,7 @@ const execute = () => {
             }
             log("Initializing Power editor...");
 
-            createEditorIDElement();
+            createPluginIDElement();
             if (results.config.editorType !== "editorType-codeMirror") {
                 var require = { paths: { vs: 'monaco-editor' } };
                 createEditorCssLink();
@@ -55,7 +55,7 @@ const createMainScript = (url) => {
     }
 };
 
-const createEditorIDElement = () => {
+const createPluginIDElement = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
     input.setAttribute('id', 'plugin-prefix');
