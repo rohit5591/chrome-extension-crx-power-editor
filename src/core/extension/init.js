@@ -27,8 +27,8 @@ const execute = () => {
             log("Initializing Power editor...");
 
             createElement();
-            var require = { paths: { vs: 'monaco-editor' } };
             if(results.config.editorType !== "editorType-codeMirror"){
+                var require = { paths: { vs: 'monaco-editor' } };
                 createEditorCssLink();
             }
             createElementEditorType(results.config.editorType);

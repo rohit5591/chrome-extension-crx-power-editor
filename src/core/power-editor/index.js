@@ -3,7 +3,7 @@ import { initCMEditor } from './code-mirror';
 import { createEditor } from './core';
 
 const type = document.getElementById('editorType');
-if (type && type?.value == 'editorType-cm') {
+if (type && type?.value == 'editorType-codeMirror') {
 	createEditor(initCMEditor);
 } else {
 	createEditor(initVSEditor);
