@@ -19,21 +19,21 @@ const execute = () => {
             }
             var isExcluded = results.config.urls.filter(function (url) {
                 return (url.indexOf(window.location.origin) !== -1);
-              }).length > 0;
+            }).length > 0;
             if (!isExcluded) {
                 log("Site is excluded => " + window.location.origin);
                 return;
             }
             log("Initializing Power editor...");
 
-            createElement();
-            if(results.config.editorType !== "editorType-codeMirror"){
+            createEditorIDElement();
+            if (results.config.editorType !== "editorType-codeMirror") {
                 var require = { paths: { vs: 'monaco-editor' } };
                 createEditorCssLink();
             }
             createElementEditorType(results.config.editorType);
             createElementEditorTheme(results.config.editorTheme);
-            createScript(chrome.runtime.getURL("main.js"));
+            createMainScript(chrome.runtime.getURL("main.js"));
             log("Power Editor initialized.");
         }
     });
@@ -46,7 +46,7 @@ const createEditorCssLink = () => {
     document.head.appendChild(link);
 };
 
-const createScript = (url) => {
+const createMainScript = (url) => {
     if (url) {
         const script = document.createElement('script');
         script.setAttribute('src', url);
@@ -55,7 +55,7 @@ const createScript = (url) => {
     }
 };
 
-const createElement = () => {
+const createEditorIDElement = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
     input.setAttribute('id', 'plugin-prefix');
