@@ -60,6 +60,11 @@ module.exports = {
 					console.log('Adjust manifest');
 					let manifest = JSON.parse(fs.readFileSync('./src/core/extension/manifest.json', { encoding: 'utf8' }));
 					let files = fs.readdirSync(__dirname + '/dist');
+					var packageJson = require('./package.json');
+					manifest.version = packageJson.version;
+					manifest.name = packageJson['extension-name'];
+					manifest.author = packageJson.author;
+					manifest.description = packageJson.description;
 					files = files.filter(file => manifest_exclude.indexOf(file) === -1)
 					manifest.web_accessible_resources[0].resources = manifest.web_accessible_resources[0].resources.concat(files);
 					fs.writeFileSync(__dirname + '/dist/manifest.json', JSON.stringify(manifest, null, "\t"));

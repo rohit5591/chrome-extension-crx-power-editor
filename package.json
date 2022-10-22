@@ -3,7 +3,8 @@
     "version": "1.2.0",
     "author": "Rohit Nagare",
     "license": "MIT",
-    "description": "Chrome Extension for CRX/DE",
+    "extension-name": "AEM CRX - Power Editor",   
+    "description": "Replacement of CRX Editor to support better editing experience",
     "scripts": {
         "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.js --progress"
     },
