@@ -1,6 +1,6 @@
 {
     "name": "chrome-extension-crx-power-editor",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": "Rohit Nagare",
     "license": "MIT",
     "description": "Chrome Extension for CRX/DE",
