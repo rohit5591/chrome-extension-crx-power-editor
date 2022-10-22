@@ -150,7 +150,7 @@ export const initCMEditor = (tab, id, codeMirror, extension) => {
 		theme = themeMap[editorThemeElement.value] || [];
 	}
 
-	const editor = new EditorView({
+	new EditorView({
 		state: EditorState.create({
 			doc: codeMirror.getValue(),
 			scrollbarStyle: "simple",

@@ -17,7 +17,7 @@ const execute = () => {
                 log("No site is allowed.");
                 return;
             }
-            var isExcluded = results.config.urls.filter(function (url) {
+            const isExcluded = results.config.urls.filter(function (url) {
                 return (url.indexOf(window.location.origin) !== -1);
             }).length > 0;
             if (!isExcluded) {
