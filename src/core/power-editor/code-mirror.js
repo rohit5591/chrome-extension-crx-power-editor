@@ -147,7 +147,7 @@ export const initCMEditor = (tab, id, codeMirror, extension) => {
 	let theme = [];
 	const editorThemeElement = document.getElementById("editorTheme");
 	if (editorThemeElement !== null && editorThemeElement?.value) {
-		theme = themeMap(editorThemeElement.value) || [];
+		theme = themeMap[editorThemeElement.value] || [];
 	}
 
 	const editor = new EditorView({
