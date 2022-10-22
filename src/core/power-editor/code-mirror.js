@@ -44,87 +44,32 @@ import {
 } from '@codemirror/theme-one-dark';
 import { default as eslint } from "eslint-linter-browserify";
 
-const getCMTheme = (theme) => {
-	switch (theme) {
-		case "amy": {
-			return amy;
-		}
-		case "ayuLight": {
-			return ayuLight;
-		}
-		case "barf": {
-			return barf;
-		}
-		case "bespin": {
-			return bespin;
-		}
-		case "birdsOfParadise": {
-			return birdsOfParadise;
-		}
-		case "boysAndGirls": {
-			return boysAndGirls;
-		}
-		case "clouds": {
-			return clouds;
-		}
-		case "cobalt": {
-			return cobalt;
-		}
-		case "coolGlow": {
-			return coolGlow;
-		}
-		case "dracula1": {
-			return dracula;
-		}
-		case "espresso": {
-			return espresso;
-		}
-		case "noctisLilac": {
-			return noctisLilac;
-		}
-		case "rosePineDawn": {
-			return rosePineDawn;
-		}
-		case "smoothy": {
-			return smoothy;
-		}
-		case "solarizedLight1": {
-			return solarizedLight;
-		}
-		case "tomorrow": {
-			return tomorrow;
-		}
-		case "dark": {
-			return syntaxHighlighting([oneDarkTheme, oneDarkHighlightStyle], { fallback: true });
-		}
-		case "materialLight": {
-			return materialLight;
-		}
-		case "materialDark": {
-			return materialDark;
-		}
-		case "solarizedLight2": {
-			return solarizedLightCM;
-		}
-		case "solarizedDark": {
-			return solarizedDark;
-		}
-		case "dracula2": {
-			return draculaCM;
-		}
-		case "githubLight": {
-			return githubLight;
-		}
-		case "githubDark": {
-			return githubDark;
-		}
-		case "aura": {
-			return aura;
-		}
-		default: {
-			return [];
-		}
-	}
+const themeMap = {
+	"amy": amy,
+	"ayuLight": ayuLight,
+	"barf": barf,
+	"bespin": bespin,
+	"birdsOfParadise": birdsOfParadise,
+	"boysAndGirls": boysAndGirls,
+	"clouds": clouds,
+	"cobalt": cobalt,
+	"coolGlow": coolGlow,
+	"dracula1": dracula,
+	"espresso": espresso,
+	"noctisLilac": noctisLilac,
+	"rosePineDawn": rosePineDawn,
+	"smoothy": smoothy,
+	"solarizedLight1": solarizedLight,
+	"tomorrow": tomorrow,
+	"dark": syntaxHighlighting([oneDarkTheme, oneDarkHighlightStyle], { fallback: true }),
+	"materialLight": materialLight,
+	"materialDark": materialDark,
+	"solarizedLight2": solarizedLightCM,
+	"solarizedDark": solarizedDark,
+	"dracula2": draculaCM,
+	"githubLight": githubLight,
+	"githubDark": githubDark,
+	"aura": aura
 };
 const extraGlobalAttributes = {
 	"data-sly-use": null,
@@ -144,7 +89,7 @@ const extraGlobalAttributes = {
 const htmlTagsConfig = (
 	{
 		extraTags: {
-			"sly": { 
+			"sly": {
 				attrs: extraGlobalAttributes
 			},
 			"template": {
@@ -202,7 +147,7 @@ export const initCMEditor = (tab, id, codeMirror, extension) => {
 	let theme = [];
 	const editorThemeElement = document.getElementById("editorTheme");
 	if (editorThemeElement !== null && editorThemeElement?.value) {
-		theme = getCMTheme(editorThemeElement.value);
+		theme = themeMap(editorThemeElement.value) || [];
 	}
 
 	const editor = new EditorView({

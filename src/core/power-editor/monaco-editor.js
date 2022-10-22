@@ -54,225 +54,64 @@ import Zenburnesque from "../../../node_modules/monaco-themes/themes/Zenburnesqu
 import PseudoWorker from 'pseudo-worker';
 import { handleResize } from './core';
 
+const themeMap = {
+    'Active4D': Active4D,
+    'Xcode_default': Xcode_default,
+    'AllHallowsEve': AllHallowsEve,
+    'Amy': Amy,
+    'BirdsofParadise': BirdsofParadise,
+    'Blackboard': Blackboard,
+    'BrillianceBlack': BrillianceBlack,
+    'BrillianceDull': BrillianceDull,
+    'ChromeDevTools': ChromeDevTools,
+    'CloudsMidnight': CloudsMidnight,
+    'Clouds': Clouds,
+    'Cobalt': Cobalt,
+    'Cobalt2': Cobalt2,
+    'Dawn': Dawn,
+    'DominionDay': DominionDay,
+    'Dracula': Dracula,
+    'Dreamweaver': Dreamweaver,
+    'Eiffel': Eiffel,
+    'EspressoLibre': EspressoLibre,
+    'GitHub': GitHub,
+    'IDLE': IDLE,
+    'idleFingers': idleFingers,
+    'iPlastic': iPlastic,
+    'Katzenmilch': Katzenmilch,
+    'krTheme': krTheme,
+    'KuroirTheme': KuroirTheme,
+    'LAZY': LAZY,
+    'MagicWBAmiga': MagicWBAmiga,
+    'MerbivoreSoft': MerbivoreSoft,
+    'Merbivore': Merbivore,
+    'monoindustrial': monoindustrial,
+    'MonokaiBright': MonokaiBright,
+    'Monokai': Monokai,
+    'NightOwl': NightOwl,
+    'Nord': Nord,
+    'OceanicNext': OceanicNext,
+    'PastelsonDark': PastelsonDark,
+    'SlushandPoppies': SlushandPoppies,
+    'Solarizeddark': Solarizeddark,
+    'Solarizedlight': Solarizedlight,
+    'SpaceCadet': SpaceCadet,
+    'Sunburst': Sunburst,
+    'TextmateMacClassic': TextmateMacClassic,
+    'TomorrowNightBlue': TomorrowNightBlue,
+    'TomorrowNightBright': TomorrowNightBright,
+    'TomorrowNightEighties': TomorrowNightEighties,
+    'TomorrowNight': TomorrowNight,
+    'Tomorrow': Tomorrow,
+    'Twilight': Twilight,
+    'UpstreamSunburst': UpstreamSunburst,
+    'VibrantInk': VibrantInk,
+    'Xcodedefault': Xcode_default,
+    'Zenburnesque': Zenburnesque
+};
 
 const getVSTheme = (theme) => {
-    let themeJson = {};
-    switch (theme) {
-        case 'Active4D': {
-            themeJson = Active4D;
-            break;
-        }
-        case 'Xcode_default': {
-            themeJson = Xcode_default;
-            break;
-        }
-        case 'AllHallowsEve': {
-            themeJson = AllHallowsEve;
-            break;
-        }
-        case 'Amy': {
-            themeJson = Amy;
-            break;
-        }
-        case 'BirdsofParadise': {
-            themeJson = BirdsofParadise;
-            break;
-        }
-        case 'Blackboard': {
-            themeJson = Blackboard;
-            break;
-        }
-        case 'BrillianceBlack': {
-            themeJson = BrillianceBlack;
-            break;
-        }
-        case 'BrillianceDull': {
-            themeJson = BrillianceDull;
-            break;
-        }
-        case 'ChromeDevTools': {
-            themeJson = ChromeDevTools;
-            break;
-        }
-        case 'CloudsMidnight': {
-            themeJson = CloudsMidnight;
-            break;
-        }
-        case 'Clouds': {
-            themeJson = Clouds;
-            break;
-        }
-        case 'Cobalt': {
-            themeJson = Cobalt;
-            break;
-        }
-        case 'Cobalt2': {
-            themeJson = Cobalt2;
-            break;
-        }
-        case 'Dawn': {
-            themeJson = Dawn;
-            break;
-        }
-        case 'DominionDay': {
-            themeJson = DominionDay;
-            break;
-        }
-        case 'Dracula': {
-            themeJson = Dracula;
-            break;
-        }
-        case 'Dreamweaver': {
-            themeJson = Dreamweaver;
-            break;
-        }
-        case 'Eiffel': {
-            themeJson = Eiffel;
-            break;
-        }
-        case 'EspressoLibre': {
-            themeJson = EspressoLibre;
-            break;
-        }
-        case 'GitHub': {
-            themeJson = GitHub;
-            break;
-        }
-        case 'IDLE': {
-            themeJson = IDLE;
-            break;
-        }
-        case 'idleFingers': {
-            themeJson = idleFingers;
-            break;
-        }
-        case 'iPlastic': {
-            themeJson = iPlastic;
-            break;
-        }
-        case 'Katzenmilch': {
-            themeJson = Katzenmilch;
-            break;
-        }
-        case 'krTheme': {
-            themeJson = krTheme;
-            break;
-        }
-        case 'KuroirTheme': {
-            themeJson = KuroirTheme;
-            break;
-        }
-        case 'LAZY': {
-            themeJson = LAZY;
-            break;
-        }
-        case 'MagicWBAmiga': {
-            themeJson = MagicWBAmiga;
-            break;
-        }
-        case 'MerbivoreSoft': {
-            themeJson = MerbivoreSoft;
-            break;
-        }
-        case 'Merbivore': {
-            themeJson = Merbivore;
-            break;
-        }
-        case 'monoindustrial': {
-            themeJson = monoindustrial;
-            break;
-        }
-        case 'MonokaiBright': {
-            themeJson = MonokaiBright;
-            break;
-        }
-        case 'Monokai': {
-            themeJson = Monokai;
-            break;
-        }
-        case 'NightOwl': {
-            themeJson = NightOwl;
-            break;
-        }
-        case 'Nord': {
-            themeJson = Nord;
-            break;
-        }
-        case 'OceanicNext': {
-            themeJson = OceanicNext;
-            break;
-        }
-        case 'PastelsonDark': {
-            themeJson = PastelsonDark;
-            break;
-        }
-        case 'SlushandPoppies': {
-            themeJson = SlushandPoppies;
-            break;
-        }
-        case 'Solarizeddark': {
-            themeJson = Solarizeddark;
-            break;
-        }
-        case 'Solarizedlight': {
-            themeJson = Solarizedlight;
-            break;
-        }
-        case 'SpaceCadet': {
-            themeJson = SpaceCadet;
-            break;
-        }
-        case 'Sunburst': {
-            themeJson = Sunburst;
-            break;
-        }
-        case 'TextmateMacClassic': {
-            themeJson = TextmateMacClassic;
-            break;
-        }
-
-        case 'TomorrowNightBlue': {
-            themeJson = TomorrowNightBlue;
-            break;
-        }
-        case 'TomorrowNightBright': {
-            themeJson = TomorrowNightBright;
-            break;
-        }
-        case 'TomorrowNightEighties': {
-            themeJson = TomorrowNightEighties;
-            break;
-        }
-        case 'TomorrowNight': {
-            themeJson = TomorrowNight;
-            break;
-        }
-        case 'Tomorrow': {
-            themeJson = Tomorrow;
-            break;
-        }
-        case 'Twilight': {
-            themeJson = Twilight;
-            break;
-        }
-        case 'UpstreamSunburst': {
-            themeJson = UpstreamSunburst;
-            break;
-        }
-        case 'VibrantInk': {
-            themeJson = VibrantInk;
-            break;
-        }
-        case 'Xcodedefault': {
-            themeJson = Xcodedefault;
-            break;
-        }
-        case 'Zenburnesque': {
-            themeJson = Zenburnesque;
-            break;
-        }
-
-    }
+    const themeJson = themeMap[theme] || {};
     if (Object.keys(themeJson).length > 0) {
         monaco.editor.defineTheme(theme, themeJson);
         monaco.editor.setTheme(theme);
