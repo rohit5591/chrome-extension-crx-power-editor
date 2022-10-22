@@ -5,11 +5,7 @@
     "license": "MIT",
     "description": "Chrome Extension for CRX/DE",
     "scripts": {
-        "init-repo": "node ./src/scripts/init-repo.js",
-        "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.js --progress",
-        "build-repo": "node ./src/scripts/build-repo.js",
-        "build-extension-min": "node ./src/scripts/build-extension.js --minify",
-        "build-extension": "node ./src/scripts/build-extension.js"
+        "build": "node ./node_modules/webpack/bin/webpack.js --config webpack.config.js --progress"
     },
     "devDependencies": {
         "clean-webpack-plugin": "^4.0.0",
