@@ -1,4 +1,8 @@
 {
+	"name": "<taken-from-'extension-name'-in-package.json>",
+	"version": "<taken-from-package.json>",
+	"description": "<taken-from-package.json>",
+	"author": "<taken-from-package.json>",
     "manifest_version": 3,
     "action": {
         "default_popup": "index.html",
