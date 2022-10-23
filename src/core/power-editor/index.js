@@ -1,4 +1,4 @@
-import { initVSEditor } from './monaco-editor';
+import { initVSEditor } from './monaco-editor/monaco-editor';
 import { initCMEditor } from './code-mirror';
 import { createEditor } from './core';
 
