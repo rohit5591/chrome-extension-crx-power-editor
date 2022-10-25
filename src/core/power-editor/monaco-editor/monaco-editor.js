@@ -52,8 +52,10 @@ import VibrantInk from "monaco-themes/themes/Vibrant Ink.json";
 import Xcode_default from "monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "monaco-themes/themes/Zenburnesque.json";
 import * as htmlService from 'vscode-html-languageservice';
+import { TextDocument } from 'vscode-languageserver-textdocument';
 import PseudoWorker from 'pseudo-worker';
 import { handleResize } from '../core';
+import { getSuggestList } from './htl-lang-config';
 
 const themeMap = {
     'Active4D': Active4D,
@@ -123,26 +125,28 @@ const getVSTheme = (theme) => {
 const registerHtmlCompletion = () => {
     monaco.languages.registerCompletionItemProvider('html', {
         provideCompletionItems: function (model, position) {
+            const result = {
+                isIncomplete: false,
+                items: []
+            };
+            const value = model.getValue();
+            console.log(model.id + "_text");
+            const textDocument = TextDocument.create(model.id + "_plaintext", 'plaintext', 0, value);
+            
+            const htmlLangService = htmlService.getLanguageService();
+            const htmlDocument = htmlLangService.parseHTMLDocument(textDocument)
+            const offset = model.getOffsetAt(position);
 
-            //// 
-    //////////// htmlService.getLanguageService().createScanner
-    //////
+            const node = htmlDocument.findNodeBefore(offset);
+            if (!node) {
+                return result;
+            }
             console.log("Triggered : model: " + model);
             console.log("Triggered : position: " + position);
-            // find out if we are completing a property in the 'dependencies' object.
-            var textUntilPosition = model.getValueInRange({
-                startLineNumber: 1,
-                startColumn: 1,
-                endLineNumber: position.lineNumber,
-                endColumn: position.column
-            });
-            var match = textUntilPosition.match(
-                /"dependencies"\s*:\s*\{\s*("[^"]*"\s*:\s*"[^"]*"\s*,\s*)*([^"]*)?$/
-            );
+
             console.log("Triggered completetion provider...");
-            if (!match) {
-                return { suggestions: [] };
-            }
+            const scanner = htmlLangService.createScanner(value);
+            let token = scanner.scan();
             var word = model.getWordUntilPosition(position);
             var range = {
                 startLineNumber: position.lineNumber,
@@ -150,9 +154,28 @@ const registerHtmlCompletion = () => {
                 startColumn: word.startColumn,
                 endColumn: word.endColumn
             };
-            return {
-                suggestions: createDependencyProposals(range)
-            };
+            while (token !== 21 && scanner.getTokenOffset() <= offset) {
+                if (token === 11) {
+                    if (scanner.getTokenOffset() <= offset && offset <= scanner.getTokenEnd()) {
+                        console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
+                        return {
+                            suggestions: getSuggestList(range).attributes
+                        };
+                    }
+                    currentAttributeName = scanner.getTokenText();
+                    console.log(currentAttributeName);
+                }
+                if (token === 3) {
+                    if (scanner.getTokenEnd() === offset) {
+                        console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
+                        return {
+                            suggestions: getSuggestList(range).tags
+                        };
+                    }
+                }
+                token = scanner.scan();
+            }
+            return result;
         }
     });
 }
@@ -173,7 +196,7 @@ const getVSName = (extension) => {
     if (extension === 'ini' || extension === 'properties') {
         return 'ini';
     }
-    if(extension === 'html') {
+    if (extension === 'html') {
         registerHtmlCompletion();
     }
     return extension;
