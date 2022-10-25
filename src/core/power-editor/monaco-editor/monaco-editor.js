@@ -125,7 +125,7 @@ const getVSTheme = (theme) => {
 const registerHtmlCompletion = () => {
     monaco.languages.registerCompletionItemProvider('html', {
         provideCompletionItems: function (model, position) {
-            const result = {
+            let result = {
                 suggestions: []
             };
             
@@ -143,17 +143,18 @@ const registerHtmlCompletion = () => {
                 startColumn: word.startColumn,
                 endColumn: word.endColumn
             };
-            window.tokens = [];
+            let tokens = new Set();
             const offset = model.getOffsetAt(position);
             while (token !== TokenType.EOS && scanner.getTokenOffset() <= offset) {
-                window.tokens.push(token);
-                console.log("token: " + TokenType[token]);
+                tokens.add(token);
+                //console.log("token: " + TokenType[token]);
                 if (token === TokenType.AttributeName) {
                     if (scanner.getTokenOffset() <= offset && offset <= scanner.getTokenEnd()) {
                         console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
-                        return {
+                        result = {
                             suggestions: getSuggestList(range).attributes
                         };
+                        break;
                     }
                     const currentAttributeName = scanner.getTokenText();
                     console.log(currentAttributeName);
@@ -161,14 +162,17 @@ const registerHtmlCompletion = () => {
                 if (token === TokenType.StartTag || token === TokenType.StartTagClose || token === TokenType.StartTagOpen) {
                     if (scanner.getTokenEnd() === offset) {
                         console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
-                        return {
+                        result = {
                             suggestions: getSuggestList(range).tags
                         };
+                        break;
                     }
                 }
                 token = scanner.scan();
             }
-            console.log("tokens: " + window.tokens);
+            const sortedTokens = Array.from(tokens).sort((a,b) => a -b);
+            console.log("tokens: " + sortedTokens);
+            sortedTokens.forEach(tk => console.log(tk + " : " + TokenType[tk]));
             return result;
         }
     });
