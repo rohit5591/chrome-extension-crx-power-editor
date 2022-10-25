@@ -1,3 +1,5 @@
+import { languages } from "monaco-editor";
+
 export const languageConfiguration = {
     "comments": {
         // symbols used for start and end a block comment.
@@ -43,29 +45,19 @@ export const getSuggestList = (range) => {
     return {
         tags: [
             {
-                label: '"sly"',
-                kind: monaco.languages.CompletionItemKind.Function,
-                documentation: 'sly documentation goes here',
-                insertText: '"sly": "*"',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                label: 'sly',
+                kind: languages.CompletionItemKind.Function,
+                insertText: 'sly data-sly-test = "${}"',
+                insertTextRules: languages.CompletionItemInsertTextRule.InsertAsSnippet,
                 range: range
             },
         ],
         attributes: [
             {
-                label: '"my-third-party-library"',
-                kind: monaco.languages.CompletionItemKind.Function,
-                documentation: 'Describe your library here',
-                insertText: '"${1:my-third-party-library}": "${2:1.2.3}"',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                range: range
-            },
-            {
-                label: '"data-sly-test"',
-                kind: monaco.languages.CompletionItemKind.Function,
-                documentation: 'data-sly-test documentation goes here',
-                insertText: '"data-sly-test": "*"',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                label: 'data-sly-test',
+                kind: languages.CompletionItemKind.Function,
+                insertText: 'data-sly-test = "${}"',
+                insertTextRules: languages.CompletionItemInsertTextRule.InsertAsSnippet,
                 range: range
             }
         ]

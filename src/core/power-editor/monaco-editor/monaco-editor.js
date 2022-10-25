@@ -51,7 +51,7 @@ import UpstreamSunburst from "monaco-themes/themes/Upstream Sunburst.json";
 import VibrantInk from "monaco-themes/themes/Vibrant Ink.json";
 import Xcode_default from "monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "monaco-themes/themes/Zenburnesque.json";
-import * as htmlService from 'vscode-html-languageservice';
+import { getLanguageService, TokenType } from 'vscode-html-languageservice';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import PseudoWorker from 'pseudo-worker';
 import { handleResize } from '../core';
@@ -126,46 +126,39 @@ const registerHtmlCompletion = () => {
     monaco.languages.registerCompletionItemProvider('html', {
         provideCompletionItems: function (model, position) {
             const result = {
-                isIncomplete: false,
-                items: []
+                suggestions: []
             };
-            const value = model.getValue();
-            console.log(model.id + "_text");
-            const textDocument = TextDocument.create(model.id + "_plaintext", 'plaintext', 0, value);
             
-            const htmlLangService = htmlService.getLanguageService();
-            const htmlDocument = htmlLangService.parseHTMLDocument(textDocument)
-            const offset = model.getOffsetAt(position);
-
-            const node = htmlDocument.findNodeBefore(offset);
-            if (!node) {
-                return result;
-            }
+            const htmlLangService = getLanguageService();
             console.log("Triggered : model: " + model);
             console.log("Triggered : position: " + position);
 
             console.log("Triggered completetion provider...");
-            const scanner = htmlLangService.createScanner(value);
+            const scanner = htmlLangService.createScanner(model.getValue());
             let token = scanner.scan();
-            var word = model.getWordUntilPosition(position);
-            var range = {
+            const word = model.getWordUntilPosition(position);
+            const range = {
                 startLineNumber: position.lineNumber,
                 endLineNumber: position.lineNumber,
                 startColumn: word.startColumn,
                 endColumn: word.endColumn
             };
-            while (token !== 21 && scanner.getTokenOffset() <= offset) {
-                if (token === 11) {
+            window.tokens = [];
+            const offset = model.getOffsetAt(position);
+            while (token !== TokenType.EOS && scanner.getTokenOffset() <= offset) {
+                window.tokens.push(token);
+                console.log("token: " + TokenType[token]);
+                if (token === TokenType.AttributeName) {
                     if (scanner.getTokenOffset() <= offset && offset <= scanner.getTokenEnd()) {
                         console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
                         return {
                             suggestions: getSuggestList(range).attributes
                         };
                     }
-                    currentAttributeName = scanner.getTokenText();
+                    const currentAttributeName = scanner.getTokenText();
                     console.log(currentAttributeName);
                 }
-                if (token === 3) {
+                if (token === TokenType.StartTag || token === TokenType.StartTagClose || token === TokenType.StartTagOpen) {
                     if (scanner.getTokenEnd() === offset) {
                         console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
                         return {
@@ -175,6 +168,7 @@ const registerHtmlCompletion = () => {
                 }
                 token = scanner.scan();
             }
+            console.log("tokens: " + window.tokens);
             return result;
         }
     });
