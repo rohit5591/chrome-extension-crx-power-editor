@@ -52,7 +52,6 @@ import VibrantInk from "monaco-themes/themes/Vibrant Ink.json";
 import Xcode_default from "monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "monaco-themes/themes/Zenburnesque.json";
 import { getLanguageService, TokenType } from 'vscode-html-languageservice';
-import { TextDocument } from 'vscode-languageserver-textdocument';
 import PseudoWorker from 'pseudo-worker';
 import { handleResize } from '../core';
 import { getSuggestList } from './htl-lang-config';
@@ -128,7 +127,7 @@ const registerHtmlCompletion = () => {
             let result = {
                 suggestions: []
             };
-            
+
             const htmlLangService = getLanguageService();
             console.log("Triggered : model: " + model);
             console.log("Triggered : position: " + position);
@@ -143,40 +142,61 @@ const registerHtmlCompletion = () => {
                 startColumn: word.startColumn,
                 endColumn: word.endColumn
             };
-            let tokens = new Set();
+            let tokens = [];
             const offset = model.getOffsetAt(position);
+            console.log("UserOffset: " + offset)
             while (token !== TokenType.EOS && scanner.getTokenOffset() <= offset) {
-                tokens.add(token);
-                //console.log("token: " + TokenType[token]);
-                if (token === TokenType.AttributeName) {
-                    if (scanner.getTokenOffset() <= offset && offset <= scanner.getTokenEnd()) {
-                        console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
-                        result = {
-                            suggestions: getSuggestList(range).attributes
-                        };
-                        break;
-                    }
-                    const currentAttributeName = scanner.getTokenText();
-                    console.log(currentAttributeName);
-                }
-                if (token === TokenType.StartTag || token === TokenType.StartTagClose || token === TokenType.StartTagOpen) {
-                    if (scanner.getTokenEnd() === offset) {
-                        console.log("scanner.getTokenOffset() : " + scanner.getTokenOffset() + "scanner.getTokenEnd() : " + scanner.getTokenEnd());
-                        result = {
-                            suggestions: getSuggestList(range).tags
-                        };
-                        break;
-                    }
-                }
+                tokens.push(token);
+                console.log(token + " : " + TokenType[token] + " TokenOffset: " + scanner.getTokenOffset() + " User: " + offset)
+                //Identify tag suggestions
                 token = scanner.scan();
             }
-            const sortedTokens = Array.from(tokens).sort((a,b) => a -b);
-            console.log("tokens: " + sortedTokens);
-            sortedTokens.forEach(tk => console.log(tk + " : " + TokenType[tk]));
+            //Identify attribute suggestions
+            if (isAttributeSuggestion(offset, tokens, scanner.getTokenOffset())) {
+                result.suggestions = getSuggestList(range).attributes;
+            }
             return result;
         }
     });
 }
+
+const isAttributeSuggestion = (userOffset, tokens, tokenOffset) => {
+    if (tokens.length <= 1) {
+        return false;
+    }
+    const tokenId = tokens[tokens.length - 1];
+    const previousTokenId = tokens[tokens.length - 2];
+    if (tokenId === TokenType.AttributeName) {
+        return true;
+    }
+    if (tokenId === TokenType.Whitespace) {
+        if (previousTokenId === TokenType.AttributeValue) {
+            return true;
+        }
+        if (previousTokenId === TokenType.StartTag && userOffset < tokenOffset) {
+            return true;
+        }
+    }
+    if (userOffset === tokenOffset && tokenId === TokenType.StartTagClose) {
+        return true;
+    }
+    return false;
+};
+
+// const isTagSuggestion = (userOffset, tokens, tokenEndOffset) => {
+//     if(tokens.length <= 1) {
+//         return true;
+//     }
+//     const tokenId = tokens[tokens.length - 1];
+//     const previousTokenId = tokens[tokens.length - 2];
+//     if ((tokenId === TokenType.AttributeName) ||
+//         (tokenId === TokenType.Whitespace && 
+//             (previousTokenId === TokenType.AttributeValue || previousTokenId === TokenType.StartTag)) ||
+//         (userOffset <= tokenEndOffset && tokenId === StartTagClose)) {
+//         return true;
+//     }
+//     return false;
+// };
 
 const getVSName = (extension) => {
     if (extension === 'js') {
