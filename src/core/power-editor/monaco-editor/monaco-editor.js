@@ -148,12 +148,15 @@ const registerHtmlCompletion = () => {
             while (token !== TokenType.EOS && scanner.getTokenOffset() <= offset) {
                 tokens.push(token);
                 console.log(token + " : " + TokenType[token] + " TokenOffset: " + scanner.getTokenOffset() + " User: " + offset)
-                //Identify tag suggestions
                 token = scanner.scan();
             }
             //Identify attribute suggestions
             if (isAttributeSuggestion(offset, tokens, scanner.getTokenOffset())) {
                 result.suggestions = getSuggestList(range).attributes;
+            }
+            //Identify tag suggestions
+            if (isTagSuggestion(tokens)) {
+                result.suggestions = getSuggestList(range).tags;
             }
             return result;
         }
@@ -177,26 +180,28 @@ const isAttributeSuggestion = (userOffset, tokens, tokenOffset) => {
             return true;
         }
     }
-    if (userOffset === tokenOffset && tokenId === TokenType.StartTagClose) {
+    if (userOffset <= tokenOffset && tokenId === TokenType.StartTagClose) {
         return true;
     }
     return false;
 };
 
-// const isTagSuggestion = (userOffset, tokens, tokenEndOffset) => {
-//     if(tokens.length <= 1) {
-//         return true;
-//     }
-//     const tokenId = tokens[tokens.length - 1];
-//     const previousTokenId = tokens[tokens.length - 2];
-//     if ((tokenId === TokenType.AttributeName) ||
-//         (tokenId === TokenType.Whitespace && 
-//             (previousTokenId === TokenType.AttributeValue || previousTokenId === TokenType.StartTag)) ||
-//         (userOffset <= tokenEndOffset && tokenId === StartTagClose)) {
-//         return true;
-//     }
-//     return false;
-// };
+const isTagSuggestion = (tokens) => {
+    if(tokens.length <= 1) {
+        return true;
+    }
+    const tokenId = tokens[tokens.length - 1];
+    const previousTokenId = tokens[tokens.length - 2];
+    if (tokenId === TokenType.Content) {
+        return true;
+    }
+    if (tokenId === TokenType.StartTagOpen) {
+        if (previousTokenId === TokenType.Content) {
+            return true;
+        }
+    }
+    return false;
+};
 
 const getVSName = (extension) => {
     if (extension === 'js') {

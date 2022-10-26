@@ -47,7 +47,14 @@ export const getSuggestList = (range) => {
             {
                 label: 'sly',
                 kind: languages.CompletionItemKind.Function,
-                insertText: 'sly data-sly-test = "${}"',
+                insertText: '<sly data-sly-test = "${}"> </sly>',
+                insertTextRules: languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                range: range
+            },
+            {
+                label: 'template',
+                kind: languages.CompletionItemKind.Function,
+                insertText: '<template data-sly-template.${1:template}=\"${@ ${2:data}}\">$2</template>$0',
                 insertTextRules: languages.CompletionItemInsertTextRule.InsertAsSnippet,
                 range: range
             },
