@@ -195,7 +195,7 @@ const isTagSuggestion = (tokens) => {
     if (tokenId === TokenType.Content) {
         return true;
     }
-    if (tokenId === TokenType.StartTagOpen) {
+    if (tokenId === TokenType.StartTagOpen || tokenId === TokenType.EndTagOpen) {
         if (previousTokenId === TokenType.Content) {
             return true;
         }
