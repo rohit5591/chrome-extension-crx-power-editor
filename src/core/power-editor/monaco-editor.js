@@ -51,10 +51,8 @@ import UpstreamSunburst from "monaco-themes/themes/Upstream Sunburst.json";
 import VibrantInk from "monaco-themes/themes/Vibrant Ink.json";
 import Xcode_default from "monaco-themes/themes/Xcode_default.json";
 import Zenburnesque from "monaco-themes/themes/Zenburnesque.json";
-import { getLanguageService, TokenType } from 'vscode-html-languageservice';
 import PseudoWorker from 'pseudo-worker';
-import { handleResize } from '../core';
-import { getSuggestList } from './htl-lang-config';
+import { handleResize } from './core';
 
 const themeMap = {
     'Active4D': Active4D,
@@ -121,88 +119,6 @@ const getVSTheme = (theme) => {
     return theme;
 };
 
-const registerHtmlCompletion = () => {
-    monaco.languages.registerCompletionItemProvider('html', {
-        provideCompletionItems: function (model, position) {
-            let result = {
-                suggestions: []
-            };
-
-            const htmlLangService = getLanguageService();
-            console.log("Triggered : model: " + model);
-            console.log("Triggered : position: " + position);
-
-            console.log("Triggered completetion provider...");
-            const scanner = htmlLangService.createScanner(model.getValue());
-            let token = scanner.scan();
-            const word = model.getWordUntilPosition(position);
-            const range = {
-                startLineNumber: position.lineNumber,
-                endLineNumber: position.lineNumber,
-                startColumn: word.startColumn,
-                endColumn: word.endColumn
-            };
-            let tokens = [];
-            const offset = model.getOffsetAt(position);
-            console.log("UserOffset: " + offset)
-            while (token !== TokenType.EOS && scanner.getTokenOffset() <= offset) {
-                tokens.push(token);
-                console.log(token + " : " + TokenType[token] + " TokenOffset: " + scanner.getTokenOffset() + " User: " + offset)
-                token = scanner.scan();
-            }
-            //Identify attribute suggestions
-            if (isAttributeSuggestion(offset, tokens, scanner.getTokenOffset())) {
-                result.suggestions = getSuggestList(range).attributes;
-            }
-            //Identify tag suggestions
-            if (isTagSuggestion(tokens)) {
-                result.suggestions = getSuggestList(range).tags;
-            }
-            return result;
-        }
-    });
-}
-
-const isAttributeSuggestion = (userOffset, tokens, tokenOffset) => {
-    if (tokens.length <= 1) {
-        return false;
-    }
-    const tokenId = tokens[tokens.length - 1];
-    const previousTokenId = tokens[tokens.length - 2];
-    if (tokenId === TokenType.AttributeName) {
-        return true;
-    }
-    if (tokenId === TokenType.Whitespace) {
-        if (previousTokenId === TokenType.AttributeValue) {
-            return true;
-        }
-        if (previousTokenId === TokenType.StartTag && userOffset < tokenOffset) {
-            return true;
-        }
-    }
-    if (userOffset <= tokenOffset && tokenId === TokenType.StartTagClose) {
-        return true;
-    }
-    return false;
-};
-
-const isTagSuggestion = (tokens) => {
-    if(tokens.length <= 1) {
-        return true;
-    }
-    const tokenId = tokens[tokens.length - 1];
-    const previousTokenId = tokens[tokens.length - 2];
-    if (tokenId === TokenType.Content) {
-        return true;
-    }
-    if (tokenId === TokenType.StartTagOpen || tokenId === TokenType.EndTagOpen) {
-        if (previousTokenId === TokenType.Content) {
-            return true;
-        }
-    }
-    return false;
-};
-
 const getVSName = (extension) => {
     if (extension === 'js') {
         return 'javascript';
@@ -218,9 +134,6 @@ const getVSName = (extension) => {
     }
     if (extension === 'ini' || extension === 'properties') {
         return 'ini';
-    }
-    if (extension === 'html') {
-        registerHtmlCompletion();
     }
     return extension;
 };

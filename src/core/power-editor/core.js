@@ -1,8 +1,11 @@
 const config = { childList: true, subtree: true };
 let initEditor;
 export const createEditor = (editor) => {
-    initEditor = editor;
+	initEditor = editor;
 	observeCRXInitiated();
+};
+const isFile = (tab) => {
+	return tab.querySelector('.x-tab-strip-text.file') && tab?.getAttribute("id")?.contains("/crx.default");
 };
 const executeHook = () => {
 	const editors = document.getElementById("editors");
@@ -14,7 +17,7 @@ const executeHook = () => {
 		editors.setAttribute("editor-progress", "true");
 	}
 	document.querySelectorAll('.x-tab-strip-closable').forEach(tab => {
-		if (tab.id) {
+		if (tab.id && isFile(tab)) {
 			const editorInitiazed = tab.getAttribute("editor-initialzed");
 			if (editorInitiazed === null) {
 				document.querySelector('.loading.editor').style.display = 'block';
@@ -94,7 +97,7 @@ export const handleResize = (containerId) => {
 
 const handleResizeHook = () => {
 	document.querySelectorAll('.x-tab-strip-closable').forEach(tab => {
-		if (tab.id) {
+		if (tab.id && isFile(tab)) {
 			handleResize(tab.id.replace("editors__", "") + "_container");
 		}
 	});

@@ -61,7 +61,7 @@ const themeMap = {
 	"smoothy": smoothy,
 	"solarizedLight1": solarizedLight,
 	"tomorrow": tomorrow,
-	"dark": syntaxHighlighting([oneDarkTheme, oneDarkHighlightStyle], { fallback: true }),
+	"dark": [oneDarkTheme, syntaxHighlighting(oneDarkHighlightStyle, { fallback: true })],
 	"materialLight": materialLight,
 	"materialDark": materialDark,
 	"solarizedLight2": solarizedLightCM,
