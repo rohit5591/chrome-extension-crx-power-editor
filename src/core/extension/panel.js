@@ -11,7 +11,7 @@ window.$ = jquery;
 
 var browser = browser || chrome;
 var isChrome = !browser;
-var config = config || { urls: ['http://localhost:4502'], isEnable: false, editorType: "editorType-vs", editorTheme: 'vs' };
+var config = config || { urls: ['http://localhost:4502'], isEnable: false, isVSMinimap: true, editorType: "editorType-vs", editorTheme: 'vs' };
 
 $(function () {
 	$('#editorEnableCheck').on("change", function (e) {
@@ -32,6 +32,8 @@ $(function () {
 	$('#btnSave').on("click", function () {
 		const isCheck = $("#editorEnableCheck").is(":checked");
 		config.isEnable = isCheck;
+		const isVSMinimap = $("#monacoEditorMinimap").is(":checked");
+		config.isVSMinimap = isVSMinimap;
 		config.editorType = $('#editorSwitch .nav-link.active').attr("id");
 		const urls = [];
 		$('.url-regex').each(function (index) {
@@ -114,6 +116,7 @@ const isValidHttpUrl = (string) => {
 const initPopup = (config) => {
 	console.log('Init popup');
 	$('#editorEnableCheck').prop('checked', config.isEnable);
+	$('#monacoEditorMinimap').prop('checked', config.isVSMinimap);
 	setLabelStatus(config.isEnable);
 
 	$('.list-url .mCSB_container').html('');

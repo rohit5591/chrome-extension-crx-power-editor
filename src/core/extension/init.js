@@ -31,8 +31,9 @@ const execute = () => {
                 var require = { paths: { vs: 'monaco-editor' } };
                 createEditorCssLink();
             }
-            createElementEditorType(results.config.editorType);
-            createElementEditorTheme(results.config.editorTheme);
+            createElement('editorType', results.config.editorType);
+            createElement('editorTheme', results.config.editorTheme);
+            createElement('isVSMinimap', results.config.isVSMinimap);
             createMainScript(chrome.runtime.getURL("main.js"));
             log("Power Editor initialized.");
         }
@@ -63,19 +64,11 @@ const createPluginIDElement = () => {
     document.body.appendChild(input);
 };
 
-const createElementEditorType = (type) => {
+const createElement = (id, value) => {
     const input = document.createElement('input');
     input.setAttribute('type', 'hidden');
-    input.setAttribute('id', 'editorType');
-    input.setAttribute('value', type);
-    document.body.appendChild(input);
-};
-
-const createElementEditorTheme = (theme) => {
-    const input = document.createElement('input');
-    input.setAttribute('type', 'hidden');
-    input.setAttribute('id', 'editorTheme');
-    input.setAttribute('value', theme);
+    input.setAttribute('id', id);
+    input.setAttribute('value', value);
     document.body.appendChild(input);
 };
 

@@ -158,6 +158,8 @@ window.MonacoEnvironment = {
 
 export const initVSEditor = (tab, id, codeMirror, extension) => {
     const editorThemeElement = document.getElementById("editorTheme");
+    const isVSMinimapElement = document.getElementById("isVSMinimap");
+    const isVSMinimap = isVSMinimapElement?.value === 'true';
     const editorTheme = getVSTheme(editorThemeElement !== null ? editorThemeElement.value : 'vs');
     const editor = monaco.editor.create(document.getElementById(id + "_container"), {
         theme: editorTheme,
@@ -169,6 +171,9 @@ export const initVSEditor = (tab, id, codeMirror, extension) => {
             horizontal: 'visible',
             verticalScrollbarSize: 12,
             horizontalScrollbarSize: 12
+        },
+        minimap: {
+            enabled: isVSMinimap
         }
     });
     editor.getModel().onDidChangeContent((event) => {

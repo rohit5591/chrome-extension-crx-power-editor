@@ -162,7 +162,7 @@ legend {
     padding-bottom: 20px;
 }
 
-#editorEnableCheck {
+#editorEnableCheck, #monacoEditorMinimap {
 	height: 20px;
     width: 40px;
     margin-right: 10px;
